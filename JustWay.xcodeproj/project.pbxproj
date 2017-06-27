@@ -1,0 +1,755 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		096C2BDE2A8F843EBE3985C2 /* libPods-JustWay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4BC09CFB8DAA7EC1B3F473 /* libPods-JustWay.a */; };
+		795A0CFB1F02336F00F02FB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0CFA1F02336F00F02FB4 /* main.m */; };
+		795A0CFE1F02336F00F02FB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0CFD1F02336F00F02FB4 /* AppDelegate.m */; };
+		795A0D011F02336F00F02FB4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0D001F02336F00F02FB4 /* ViewController.m */; };
+		795A0D041F02336F00F02FB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795A0D021F02336F00F02FB4 /* Main.storyboard */; };
+		795A0D061F02336F00F02FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 795A0D051F02336F00F02FB4 /* Assets.xcassets */; };
+		795A0D091F02336F00F02FB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795A0D071F02336F00F02FB4 /* LaunchScreen.storyboard */; };
+		795A0D141F02336F00F02FB4 /* JustWayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0D131F02336F00F02FB4 /* JustWayTests.m */; };
+		795A0D1F1F02336F00F02FB4 /* JustWayUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0D1E1F02336F00F02FB4 /* JustWayUITests.m */; };
+		795A0DA91F02409400F02FB4 /* GCDWebUploader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 795A0DA61F02409400F02FB4 /* GCDWebUploader.bundle */; };
+		795A0DAA1F02409400F02FB4 /* GCDWebUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0DA81F02409400F02FB4 /* GCDWebUploader.m */; };
+		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
+		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		795A0D101F02336F00F02FB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 795A0CEE1F02336F00F02FB4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 795A0CF51F02336F00F02FB4;
+			remoteInfo = JustWay;
+		};
+		795A0D1B1F02336F00F02FB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 795A0CEE1F02336F00F02FB4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 795A0CF51F02336F00F02FB4;
+			remoteInfo = JustWay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0E3F7CC21FC24A2AD0E60233 /* Pods-JustWayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3A0453F26E7CBE4938420C33 /* Pods-JustWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.debug.xcconfig"; sourceTree = "<group>"; };
+		4A4BC09CFB8DAA7EC1B3F473 /* libPods-JustWay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		59820CA5EDA4B4D5E1F20705 /* Pods-JustWayTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayTests/Pods-JustWayTests.release.xcconfig"; sourceTree = "<group>"; };
+		795A0CF61F02336F00F02FB4 /* JustWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		795A0CFA1F02336F00F02FB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		795A0CFC1F02336F00F02FB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		795A0CFD1F02336F00F02FB4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		795A0CFF1F02336F00F02FB4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		795A0D001F02336F00F02FB4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		795A0D031F02336F00F02FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		795A0D051F02336F00F02FB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		795A0D081F02336F00F02FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		795A0D0A1F02336F00F02FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		795A0D0F1F02336F00F02FB4 /* JustWayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustWayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		795A0D131F02336F00F02FB4 /* JustWayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustWayTests.m; sourceTree = "<group>"; };
+		795A0D151F02336F00F02FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		795A0D1A1F02336F00F02FB4 /* JustWayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustWayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		795A0D1E1F02336F00F02FB4 /* JustWayUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustWayUITests.m; sourceTree = "<group>"; };
+		795A0D201F02336F00F02FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		795A0DA61F02409400F02FB4 /* GCDWebUploader.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GCDWebUploader.bundle; sourceTree = "<group>"; };
+		795A0DA71F02409400F02FB4 /* GCDWebUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebUploader.h; sourceTree = "<group>"; };
+		795A0DA81F02409400F02FB4 /* GCDWebUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebUploader.m; sourceTree = "<group>"; };
+		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
+		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D934A630CD2C491B9221004B /* Pods-JustWayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayTests/Pods-JustWayTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		795A0CF31F02336F00F02FB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096C2BDE2A8F843EBE3985C2 /* libPods-JustWay.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		795A0D0C1F02336F00F02FB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		795A0D171F02336F00F02FB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		791EB45269B0B8ADEA88EF84 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3A0453F26E7CBE4938420C33 /* Pods-JustWay.debug.xcconfig */,
+				79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */,
+				D934A630CD2C491B9221004B /* Pods-JustWayTests.debug.xcconfig */,
+				59820CA5EDA4B4D5E1F20705 /* Pods-JustWayTests.release.xcconfig */,
+				B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */,
+				0E3F7CC21FC24A2AD0E60233 /* Pods-JustWayUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		795A0CED1F02336F00F02FB4 = {
+			isa = PBXGroup;
+			children = (
+				795A0CF81F02336F00F02FB4 /* JustWay */,
+				795A0D121F02336F00F02FB4 /* JustWayTests */,
+				795A0D1D1F02336F00F02FB4 /* JustWayUITests */,
+				795A0CF71F02336F00F02FB4 /* Products */,
+				791EB45269B0B8ADEA88EF84 /* Pods */,
+				DAE8F1F147C12E71EB53D7DE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		795A0CF71F02336F00F02FB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				795A0CF61F02336F00F02FB4 /* JustWay.app */,
+				795A0D0F1F02336F00F02FB4 /* JustWayTests.xctest */,
+				795A0D1A1F02336F00F02FB4 /* JustWayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		795A0CF81F02336F00F02FB4 /* JustWay */ = {
+			isa = PBXGroup;
+			children = (
+				795A0DA51F02409400F02FB4 /* GCDWebUploader */,
+				795A0CFC1F02336F00F02FB4 /* AppDelegate.h */,
+				795A0CFD1F02336F00F02FB4 /* AppDelegate.m */,
+				795A0CFF1F02336F00F02FB4 /* ViewController.h */,
+				795A0D001F02336F00F02FB4 /* ViewController.m */,
+				795A0D021F02336F00F02FB4 /* Main.storyboard */,
+				795A0D051F02336F00F02FB4 /* Assets.xcassets */,
+				795A0D071F02336F00F02FB4 /* LaunchScreen.storyboard */,
+				795A0D0A1F02336F00F02FB4 /* Info.plist */,
+				795A0CF91F02336F00F02FB4 /* Supporting Files */,
+			);
+			path = JustWay;
+			sourceTree = "<group>";
+		};
+		795A0CF91F02336F00F02FB4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				795A0CFA1F02336F00F02FB4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		795A0D121F02336F00F02FB4 /* JustWayTests */ = {
+			isa = PBXGroup;
+			children = (
+				795A0D131F02336F00F02FB4 /* JustWayTests.m */,
+				795A0D151F02336F00F02FB4 /* Info.plist */,
+			);
+			path = JustWayTests;
+			sourceTree = "<group>";
+		};
+		795A0D1D1F02336F00F02FB4 /* JustWayUITests */ = {
+			isa = PBXGroup;
+			children = (
+				795A0D1E1F02336F00F02FB4 /* JustWayUITests.m */,
+				795A0D201F02336F00F02FB4 /* Info.plist */,
+			);
+			path = JustWayUITests;
+			sourceTree = "<group>";
+		};
+		795A0DA51F02409400F02FB4 /* GCDWebUploader */ = {
+			isa = PBXGroup;
+			children = (
+				795A0DA61F02409400F02FB4 /* GCDWebUploader.bundle */,
+				795A0DA71F02409400F02FB4 /* GCDWebUploader.h */,
+				795A0DA81F02409400F02FB4 /* GCDWebUploader.m */,
+			);
+			path = GCDWebUploader;
+			sourceTree = "<group>";
+		};
+		DAE8F1F147C12E71EB53D7DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A4BC09CFB8DAA7EC1B3F473 /* libPods-JustWay.a */,
+				C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */,
+				97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		795A0CF51F02336F00F02FB4 /* JustWay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 795A0D231F02336F00F02FB4 /* Build configuration list for PBXNativeTarget "JustWay" */;
+			buildPhases = (
+				0F43AA0285E99392C7433D3F /* [CP] Check Pods Manifest.lock */,
+				795A0CF21F02336F00F02FB4 /* Sources */,
+				795A0CF31F02336F00F02FB4 /* Frameworks */,
+				795A0CF41F02336F00F02FB4 /* Resources */,
+				CFC413FC14A35262CBC91516 /* [CP] Embed Pods Frameworks */,
+				27C50EDA41F815468E46338C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JustWay;
+			productName = JustWay;
+			productReference = 795A0CF61F02336F00F02FB4 /* JustWay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		795A0D0E1F02336F00F02FB4 /* JustWayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 795A0D261F02336F00F02FB4 /* Build configuration list for PBXNativeTarget "JustWayTests" */;
+			buildPhases = (
+				36CAEDD939CBB19021CE45E2 /* [CP] Check Pods Manifest.lock */,
+				795A0D0B1F02336F00F02FB4 /* Sources */,
+				795A0D0C1F02336F00F02FB4 /* Frameworks */,
+				795A0D0D1F02336F00F02FB4 /* Resources */,
+				EEB9F78DF4CBDEF13B6D657D /* [CP] Embed Pods Frameworks */,
+				B085F58B96A6B4241CFE62FE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				795A0D111F02336F00F02FB4 /* PBXTargetDependency */,
+			);
+			name = JustWayTests;
+			productName = JustWayTests;
+			productReference = 795A0D0F1F02336F00F02FB4 /* JustWayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		795A0D191F02336F00F02FB4 /* JustWayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 795A0D291F02336F00F02FB4 /* Build configuration list for PBXNativeTarget "JustWayUITests" */;
+			buildPhases = (
+				88F047EC687F17393894B0E7 /* [CP] Check Pods Manifest.lock */,
+				795A0D161F02336F00F02FB4 /* Sources */,
+				795A0D171F02336F00F02FB4 /* Frameworks */,
+				795A0D181F02336F00F02FB4 /* Resources */,
+				5CA3A280007E8BA8A21C5A0D /* [CP] Embed Pods Frameworks */,
+				95A6E5C3507B605B75B308F3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				795A0D1C1F02336F00F02FB4 /* PBXTargetDependency */,
+			);
+			name = JustWayUITests;
+			productName = JustWayUITests;
+			productReference = 795A0D1A1F02336F00F02FB4 /* JustWayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		795A0CEE1F02336F00F02FB4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = HeJun;
+				TargetAttributes = {
+					795A0CF51F02336F00F02FB4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = UVTAS8R4A5;
+						ProvisioningStyle = Automatic;
+					};
+					795A0D0E1F02336F00F02FB4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = UVTAS8R4A5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 795A0CF51F02336F00F02FB4;
+					};
+					795A0D191F02336F00F02FB4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = UVTAS8R4A5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 795A0CF51F02336F00F02FB4;
+					};
+				};
+			};
+			buildConfigurationList = 795A0CF11F02336F00F02FB4 /* Build configuration list for PBXProject "JustWay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 795A0CED1F02336F00F02FB4;
+			productRefGroup = 795A0CF71F02336F00F02FB4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				795A0CF51F02336F00F02FB4 /* JustWay */,
+				795A0D0E1F02336F00F02FB4 /* JustWayTests */,
+				795A0D191F02336F00F02FB4 /* JustWayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		795A0CF41F02336F00F02FB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				795A0D091F02336F00F02FB4 /* LaunchScreen.storyboard in Resources */,
+				795A0DA91F02409400F02FB4 /* GCDWebUploader.bundle in Resources */,
+				795A0D061F02336F00F02FB4 /* Assets.xcassets in Resources */,
+				795A0D041F02336F00F02FB4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		795A0D0D1F02336F00F02FB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		795A0D181F02336F00F02FB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F43AA0285E99392C7433D3F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		27C50EDA41F815468E46338C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustWay/Pods-JustWay-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		36CAEDD939CBB19021CE45E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5CA3A280007E8BA8A21C5A0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88F047EC687F17393894B0E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		95A6E5C3507B605B75B308F3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B085F58B96A6B4241CFE62FE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustWayTests/Pods-JustWayTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFC413FC14A35262CBC91516 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustWay/Pods-JustWay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEB9F78DF4CBDEF13B6D657D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustWayTests/Pods-JustWayTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		795A0CF21F02336F00F02FB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				795A0D011F02336F00F02FB4 /* ViewController.m in Sources */,
+				795A0CFE1F02336F00F02FB4 /* AppDelegate.m in Sources */,
+				795A0CFB1F02336F00F02FB4 /* main.m in Sources */,
+				795A0DAA1F02409400F02FB4 /* GCDWebUploader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		795A0D0B1F02336F00F02FB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				795A0D141F02336F00F02FB4 /* JustWayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		795A0D161F02336F00F02FB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				795A0D1F1F02336F00F02FB4 /* JustWayUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		795A0D111F02336F00F02FB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 795A0CF51F02336F00F02FB4 /* JustWay */;
+			targetProxy = 795A0D101F02336F00F02FB4 /* PBXContainerItemProxy */;
+		};
+		795A0D1C1F02336F00F02FB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 795A0CF51F02336F00F02FB4 /* JustWay */;
+			targetProxy = 795A0D1B1F02336F00F02FB4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		795A0D021F02336F00F02FB4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				795A0D031F02336F00F02FB4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		795A0D071F02336F00F02FB4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				795A0D081F02336F00F02FB4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		795A0D211F02336F00F02FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		795A0D221F02336F00F02FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		795A0D241F02336F00F02FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0453F26E7CBE4938420C33 /* Pods-JustWay.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = UVTAS8R4A5;
+				INFOPLIST_FILE = JustWay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hejun.JustWay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		795A0D251F02336F00F02FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = UVTAS8R4A5;
+				INFOPLIST_FILE = JustWay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hejun.JustWay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		795A0D271F02336F00F02FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D934A630CD2C491B9221004B /* Pods-JustWayTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = UVTAS8R4A5;
+				INFOPLIST_FILE = JustWayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hejun.JustWayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JustWay.app/JustWay";
+			};
+			name = Debug;
+		};
+		795A0D281F02336F00F02FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59820CA5EDA4B4D5E1F20705 /* Pods-JustWayTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = UVTAS8R4A5;
+				INFOPLIST_FILE = JustWayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hejun.JustWayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JustWay.app/JustWay";
+			};
+			name = Release;
+		};
+		795A0D2A1F02336F00F02FB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UVTAS8R4A5;
+				INFOPLIST_FILE = JustWayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hejun.JustWayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = JustWay;
+			};
+			name = Debug;
+		};
+		795A0D2B1F02336F00F02FB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E3F7CC21FC24A2AD0E60233 /* Pods-JustWayUITests.release.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UVTAS8R4A5;
+				INFOPLIST_FILE = JustWayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.hejun.JustWayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = JustWay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		795A0CF11F02336F00F02FB4 /* Build configuration list for PBXProject "JustWay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				795A0D211F02336F00F02FB4 /* Debug */,
+				795A0D221F02336F00F02FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		795A0D231F02336F00F02FB4 /* Build configuration list for PBXNativeTarget "JustWay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				795A0D241F02336F00F02FB4 /* Debug */,
+				795A0D251F02336F00F02FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		795A0D261F02336F00F02FB4 /* Build configuration list for PBXNativeTarget "JustWayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				795A0D271F02336F00F02FB4 /* Debug */,
+				795A0D281F02336F00F02FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		795A0D291F02336F00F02FB4 /* Build configuration list for PBXNativeTarget "JustWayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				795A0D2A1F02336F00F02FB4 /* Debug */,
+				795A0D2B1F02336F00F02FB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 795A0CEE1F02336F00F02FB4 /* Project object */;
+}
