@@ -16,8 +16,10 @@
 @property (nonatomic, strong) NSMutableArray *dataList;
 /** 文件存储目录 */
 @property (nonatomic, copy)	  NSString		 *fileDir;
-/** 服务器监听断开 */
+/** 服务器监听端口 */
 @property (nonatomic, assign) NSUInteger	 serverPort;
+/** 服务器监听地址 */
+@property (nonatomic, copy)	  NSString		 *serverUrl;
 
 @end
 
@@ -31,6 +33,8 @@
 	[self setupViews];
 	[self initData];
 	[self.tableView reloadData];
+	
+	[[HJUploaderServer sharedInstance] addObserver:self forKeyPath:@"fileList" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,13 +44,24 @@
 
 - (void)dealloc {
 	HJLog(@"%s", __func__);
+	[[HJUploaderServer sharedInstance] removeObserver:self forKeyPath:@"fileList" context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+	NSMutableArray *fileList = change[NSKeyValueChangeNewKey];
+	
+//	HJLog(@"%@ : %@", change, fileList);
+	self.dataList = [fileList mutableCopy];
+	[self.tableView reloadData];
 }
 
 /**
  * 初始化数据
  */
 - (void)initData {
-	self.dataList = [[HJUploaderServer sharedInstance] getFileListWithDir:self.fileDir];
+	[HJUploaderServer sharedInstance].fileDir = self.fileDir;
+	[[HJUploaderServer sharedInstance] getFileLists];
+	self.dataList = [HJUploaderServer sharedInstance].fileList;
 }
 
 /**
@@ -79,10 +94,19 @@
 	HJLog(@"启动服务器");
 	if (!button.isSelected) {
 		//启动
-		[[HJUploaderServer sharedInstance] startWithDir:self.fileDir port:self.serverPort];
+		HJWeakSelf;
+		[[HJUploaderServer sharedInstance] startWithDir:self.fileDir port:self.serverPort block:^(NSObject *obj) {
+			if ([obj isKindOfClass:[NSString class]]) {
+				weakSelf.serverUrl = (NSString *)obj;
+				self.title = weakSelf.serverUrl;
+			} else {
+				HJLog(@"启动失败");
+			}
+		}];
 	} else {
 		//暂停
 		[[HJUploaderServer sharedInstance] stop];
+		self.title = @"动态";
 	}
 	button.selected = !button.isSelected;
 }

@@ -27,7 +27,7 @@
 	return instance;
 }
 
-- (BOOL)startWithDir:(NSString *)dir port:(NSUInteger)port {
+- (BOOL)startWithDir:(NSString *)dir port:(NSUInteger)port block:(void (^)(NSObject *))block {
 	GCDWebUploader *uploader = [[GCDWebUploader alloc] initWithUploadDirectory:dir];
 	uploader.delegate = self;
 	uploader.allowHiddenItems = YES;
@@ -39,7 +39,13 @@
 //		NSString *msg = NSLocalizedString(@"GCDWebServer not running!", nil);
 //		HJLog(@"%@", msg);
 //	}
-	return [uploader startWithPort:port bonjourName:nil];
+	BOOL start = [uploader startWithPort:port bonjourName:nil];
+	if (start) {
+		block(uploader.serverURL.absoluteString);
+	} else {
+		block(nil);
+	}
+	return start;
 }
 
 - (void)stop {
@@ -52,18 +58,22 @@
 #pragma mark - GCDWebUploaderDelegate
 - (void)webUploader:(GCDWebUploader*)uploader didUploadFileAtPath:(NSString*)path {
 	HJLog(@"[UPLOAD] %@", path);
+	[self getFileLists];
 }
 
 - (void)webUploader:(GCDWebUploader*)uploader didMoveItemFromPath:(NSString*)fromPath toPath:(NSString*)toPath {
 	HJLog(@"[MOVE] %@ -> %@", fromPath, toPath);
+	[self getFileLists];
 }
 
 - (void)webUploader:(GCDWebUploader*)uploader didDeleteItemAtPath:(NSString*)path {
 	HJLog(@"[DELETE] %@", path);
+	[self getFileLists];
 }
 
 - (void)webUploader:(GCDWebUploader*)uploader didCreateDirectoryAtPath:(NSString*)path {
 	HJLog(@"[CREATE] %@", path);
+	[self getFileLists];
 }
 
 #pragma mark - GCDWebServerDelegate
@@ -87,18 +97,18 @@
 /**
  * 获取文件及文件夹列表
  */
-- (NSMutableArray *)getFileListWithDir:(NSString *)dir {
-	if (dir == nil) {
-		return [NSMutableArray array];
+- (void)getFileLists {
+	if (self.fileDir == nil) {
+		return ;
 	}
 	
 	NSError *error = nil;
 	NSFileManager *fm = [NSFileManager defaultManager];
-	NSArray *files = [fm contentsOfDirectoryAtPath:dir error:&error];
+	NSArray *files = [fm contentsOfDirectoryAtPath:self.fileDir error:&error];
 	
 	NSMutableArray *fileList = [NSMutableArray array];
 	for (NSString *fileName in files) {
-		NSString *filePath = [dir stringByAppendingPathComponent:fileName];
+		NSString *filePath = [self.fileDir stringByAppendingPathComponent:fileName];
 		NSDictionary *filesAttr = [fm attributesOfItemAtPath:filePath error:nil];
 		
 		CGFloat fileSize = [filesAttr[NSFileSize] floatValue];
@@ -111,7 +121,8 @@
 	}
 	
 	HJLog(@"%@", files);
-	return fileList;
+	self.fileList = fileList;
+//	return fileList;
 }
 
 @end

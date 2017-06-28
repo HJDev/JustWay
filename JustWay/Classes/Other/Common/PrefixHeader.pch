@@ -25,4 +25,8 @@
 	#endif
 #endif
 
+/** Weak & Strong */
+#define HJWeakSelf __weak __typeof(&*self)weakSelf = self
+#define HJStrongSelf __strong __typeof(&*self)strongSelf = weakSelf
+
 #endif /* PrefixHeader_pch */
