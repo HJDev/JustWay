@@ -7,6 +7,7 @@ target 'JustWay' do
 
   # Pods for JustWay
 	pod 'GCDWebServer'
+	pod 'RDVTabBarController'
 
   target 'JustWayTests' do
     inherit! :search_paths

@@ -2,11 +2,12 @@
 //  AppDelegate.m
 //  JustWay
 //
-//  Created by HeJun<mail@hejun.org> on 27/06/2017.
+//  Created by HeJun on 27/06/2017.
 //  Copyright © 2017 HeJun. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "HJConfig.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// Override point for customization after application launch.
+	
+	self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+	self.window.rootViewController = [HJConfig configTabBar];
+	[self.window makeKeyAndVisible];
 	return YES;
 }
 
