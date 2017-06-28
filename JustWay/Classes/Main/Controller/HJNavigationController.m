@@ -7,6 +7,7 @@
 //
 
 #import "HJNavigationController.h"
+#import <RDVTabBarController.h>
 
 @interface HJNavigationController ()
 
@@ -24,14 +25,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	[super pushViewController:viewController animated:animated];
+	
+	if (self.viewControllers.count > 1) {
+		[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+	}
 }
-*/
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+	
+	if (self.viewControllers.count == 2) {
+		[self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+	}
+	
+	return [super popViewControllerAnimated:animated];
+}
 
 @end

@@ -9,6 +9,8 @@
 #import "HJNewsViewController.h"
 #import "HJUploaderServer.h"
 
+#import "HJMusicPlayViewController.h"
+
 @interface HJNewsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak)	  UITableView	 *tableView;
@@ -98,7 +100,7 @@
 		[[HJUploaderServer sharedInstance] startWithDir:self.fileDir port:self.serverPort block:^(NSObject *obj) {
 			if ([obj isKindOfClass:[NSString class]]) {
 				weakSelf.serverUrl = (NSString *)obj;
-				self.title = weakSelf.serverUrl;
+				weakSelf.title = weakSelf.serverUrl;
 			} else {
 				HJLog(@"启动失败");
 			}
@@ -130,6 +132,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	NSDictionary *dic = self.dataList[indexPath.row];
+	NSString *fileName = dic[@"title"];
+	
+	if ([fileName hasSuffix:@".mp3"]) {
+		HJMusicPlayViewController *mpVc = [HJMusicPlayViewController new];
+		mpVc.playUrl = [self.fileDir stringByAppendingPathComponent:fileName];
+		mpVc.title = fileName;
+		[self.navigationController pushViewController:mpVc animated:YES];
+	}
 }
 
 #pragma mark - lazyload
