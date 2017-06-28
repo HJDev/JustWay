@@ -43,7 +43,7 @@
 		NSString *tabIconName = tabbarImages[i];
 		NSString *tabSelIconName = [NSString stringWithFormat:@"%@_selected", tabIconName];
 		[item setFinishedSelectedImage:[UIImage imageNamed:tabSelIconName] withFinishedUnselectedImage:[UIImage imageNamed:tabIconName]];
-		[item setSelectedTitleAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10]}];
+		[item setSelectedTitleAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10], NSForegroundColorAttributeName : HJRGB(4, 164, 255)}];
 		[item setUnselectedTitleAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10]}];
 		[item setTitlePositionAdjustment:UIOffsetMake(0, 3)];
 		

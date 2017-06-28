@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  JustWay
+//
+//  Created by HeJun on 28/06/2017.
+//  Copyright © 2017 HeJun. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+/** 颜色 */
+#define HJRGBA(r, g, b, a) [UIColor colorWithRed:((r) / 255.0) green:((g) / 255.0) blue:((b) / 255.0) alpha:(a)]
+#define HJRGB(r, g, b)	   HJRGBA(r, g, b, 1.0)
+#define HJRANDOM		   HJRGB(arc4random() % 255, arc4random() % 255, arc4random() % 255)
+
+/** LOG */
+#ifdef DEBUG
+	#ifndef HJLog
+		#define HJLog(fmt, ...) {NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);}
+	#endif
+#else
+	#ifndef HJLog
+		#define HJLog(...)
+	#endif
+#endif
+
+#endif /* PrefixHeader_pch */
