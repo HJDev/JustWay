@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJBaseViewController.h"
 
-@interface HJMeViewController : UIViewController
+@interface HJMeViewController : HJBaseViewController
 
 @end

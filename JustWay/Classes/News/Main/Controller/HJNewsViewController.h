@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJBaseViewController.h"
 
-@interface HJNewsViewController : UIViewController
+@interface HJNewsViewController : HJBaseViewController
 
 @end

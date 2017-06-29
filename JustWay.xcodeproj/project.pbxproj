@@ -40,6 +40,7 @@
 		795A0E311F03B43200F02FB4 /* HJMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E301F03B43200F02FB4 /* HJMusicPlayer.m */; };
 		795A0E341F03B64000F02FB4 /* HJWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E331F03B64000F02FB4 /* HJWeakTimer.m */; };
 		795A0E391F03B84B00F02FB4 /* HJMusicPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E381F03B84B00F02FB4 /* HJMusicPlayViewController.m */; };
+		795A0E3C1F04DC5600F02FB4 /* HJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */; };
 		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
 		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,8 @@
 		795A0E331F03B64000F02FB4 /* HJWeakTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJWeakTimer.m; sourceTree = "<group>"; };
 		795A0E371F03B84B00F02FB4 /* HJMusicPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayViewController.h; sourceTree = "<group>"; };
 		795A0E381F03B84B00F02FB4 /* HJMusicPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayViewController.m; sourceTree = "<group>"; };
+		795A0E3A1F04DC5600F02FB4 /* HJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJBaseViewController.h; sourceTree = "<group>"; };
+		795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJBaseViewController.m; sourceTree = "<group>"; };
 		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
 		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -342,6 +345,8 @@
 			children = (
 				795A0DEE1F034D5C00F02FB4 /* HJNavigationController.h */,
 				795A0DEF1F034D5C00F02FB4 /* HJNavigationController.m */,
+				795A0E3A1F04DC5600F02FB4 /* HJBaseViewController.h */,
+				795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -764,6 +769,7 @@
 				795A0DCD1F03428400F02FB4 /* HJFilesViewController.m in Sources */,
 				795A0DD01F03428E00F02FB4 /* HJMeViewController.m in Sources */,
 				795A0E091F037F5F00F02FB4 /* HJUploaderServer.m in Sources */,
+				795A0E3C1F04DC5600F02FB4 /* HJBaseViewController.m in Sources */,
 				795A0E391F03B84B00F02FB4 /* HJMusicPlayViewController.m in Sources */,
 				795A0DCA1F0341D200F02FB4 /* HJNewsViewController.m in Sources */,
 			);

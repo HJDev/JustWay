@@ -8,11 +8,10 @@
 
 #import "HJNewsViewController.h"
 #import "HJUploaderServer.h"
-#import <RDVTabBarController.h>
 
 #import "HJMusicPlayViewController.h"
 
-@interface HJNewsViewController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate>
+@interface HJNewsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak)	  UITableView	 *tableView;
 
@@ -39,7 +38,6 @@
 	
 	[[HJUploaderServer sharedInstance] addObserver:self forKeyPath:@"fileList" options:NSKeyValueObservingOptionNew context:nil];
 	
-	self.navigationController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,19 +48,6 @@
 - (void)dealloc {
 	HJLog(@"%s", __func__);
 	[[HJUploaderServer sharedInstance] removeObserver:self forKeyPath:@"fileList" context:nil];
-}
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-	HJLog(@"%s", __func__);
-}
-
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-	HJLog(@"%s", __func__);
-	if (self.navigationController.viewControllers.count > 1) {
-		[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
-	} else {
-		[self.rdv_tabBarController setTabBarHidden:NO animated:YES];
-	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
