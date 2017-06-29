@@ -34,11 +34,6 @@
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
-	
-	if (self.viewControllers.count == 2) {
-		[self.rdv_tabBarController setTabBarHidden:NO animated:YES];
-	}
-	
 	return [super popViewControllerAnimated:animated];
 }
 

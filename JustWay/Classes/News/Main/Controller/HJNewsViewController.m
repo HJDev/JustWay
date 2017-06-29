@@ -8,10 +8,11 @@
 
 #import "HJNewsViewController.h"
 #import "HJUploaderServer.h"
+#import <RDVTabBarController.h>
 
 #import "HJMusicPlayViewController.h"
 
-@interface HJNewsViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HJNewsViewController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate>
 
 @property (nonatomic, weak)	  UITableView	 *tableView;
 
@@ -37,6 +38,8 @@
 	[self.tableView reloadData];
 	
 	[[HJUploaderServer sharedInstance] addObserver:self forKeyPath:@"fileList" options:NSKeyValueObservingOptionNew context:nil];
+	
+	self.navigationController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +50,19 @@
 - (void)dealloc {
 	HJLog(@"%s", __func__);
 	[[HJUploaderServer sharedInstance] removeObserver:self forKeyPath:@"fileList" context:nil];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	HJLog(@"%s", __func__);
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	HJLog(@"%s", __func__);
+	if (self.navigationController.viewControllers.count > 1) {
+		[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
+	} else {
+		[self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+	}
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -99,8 +115,8 @@
 		HJWeakSelf;
 		[[HJUploaderServer sharedInstance] startWithDir:self.fileDir port:self.serverPort block:^(NSObject *obj) {
 			if ([obj isKindOfClass:[NSString class]]) {
-				weakSelf.serverUrl = (NSString *)obj;
-				weakSelf.title = weakSelf.serverUrl;
+				NSString *uploadLink = (NSString *)obj;
+				[weakSelf setUploadLink:uploadLink];
 			} else {
 				HJLog(@"启动失败");
 			}
@@ -111,6 +127,14 @@
 		self.title = @"动态";
 	}
 	button.selected = !button.isSelected;
+}
+
+/**
+ * 设置上传链接
+ */
+- (void)setUploadLink:(NSString *)link {
+	self.serverUrl = link;
+	self.title = link;
 }
 
 #pragma mark - UITableViewDelegate

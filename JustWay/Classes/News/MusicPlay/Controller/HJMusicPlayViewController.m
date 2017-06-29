@@ -16,13 +16,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+	self.view.backgroundColor = [UIColor whiteColor];
 	
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	HJLog(@"%s", __func__)
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	
+	HJLog(@"%s", __func__);
 }
 
 - (void)dealloc {
