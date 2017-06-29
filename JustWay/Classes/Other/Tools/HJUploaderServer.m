@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HJUploaderServer.h"
 #import "GCDWebUploader.h"
+#import "HJNewsModel.h"
 
 @interface HJUploaderServer()<GCDWebUploaderDelegate>
 
@@ -32,13 +33,7 @@
 	uploader.delegate = self;
 	uploader.allowHiddenItems = YES;
 	self.uploader = uploader;
-//	if ([uploader startWithPort:port bonjourName:nil]) {
-//		NSString *msg = [NSString stringWithFormat:NSLocalizedString(@"GCDWebServer running locally on server %@", nil), uploader.serverURL.absoluteString];
-//		HJLog(@"%@", msg);
-//	} else {
-//		NSString *msg = NSLocalizedString(@"GCDWebServer not running!", nil);
-//		HJLog(@"%@", msg);
-//	}
+	
 	BOOL start = [uploader startWithPort:port bonjourName:nil];
 	if (start) {
 		block(uploader.serverURL.absoluteString);
@@ -111,11 +106,19 @@
 		NSString *filePath = [self.fileDir stringByAppendingPathComponent:fileName];
 		NSDictionary *filesAttr = [fm attributesOfItemAtPath:filePath error:nil];
 		
-		CGFloat fileSize = [filesAttr[NSFileSize] floatValue];
+		NSInteger fileSize = [filesAttr[NSFileSize] floatValue];
 		NSString *fileDetail = @"";
 		fileDetail = [NSString stringWithFormat:@"%@",
 					  [NSByteCountFormatter stringFromByteCount:fileSize countStyle:NSByteCountFormatterCountStyleFile]];
 		NSDictionary *dic = @{@"title" : fileName, @"detail" : fileDetail};
+		HJNewsModel *model = [HJNewsModel new];
+		model.fileName = fileName;
+		model.fileSize = fileSize;
+		model.filePath = [self.fileDir stringByAppendingPathComponent:fileName];
+		
+		NSString *dateStr = filesAttr[NSFileCreationDate];
+		NSDate *date = [NSDate dateWithFormatedTime:dateStr formate:@"yyyy-MM-dd HH:mm zzz"];
+//		model.createTime = [filesAttr[NSFileCreationDate] doubleValue];
 		
 		[fileList addObject:dic];
 	}

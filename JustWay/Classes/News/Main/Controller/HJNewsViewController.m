@@ -8,6 +8,8 @@
 
 #import "HJNewsViewController.h"
 #import "HJUploaderServer.h"
+#import "HJNewsModel.h"
+#import "HJNewsTableViewCell.h"
 
 #import "HJMusicPlayViewController.h"
 
@@ -128,9 +130,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
+	HJNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HJNewsTableViewCell class])];
 	if (cell == nil) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NSStringFromClass([UITableViewCell class])];
+		cell = [[HJNewsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NSStringFromClass([HJNewsTableViewCell class])];
 	}
 	
 	NSDictionary *dic = [self.dataList objectAtIndex:indexPath.row];

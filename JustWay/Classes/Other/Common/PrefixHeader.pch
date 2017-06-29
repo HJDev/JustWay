@@ -29,4 +29,8 @@
 #define HJWeakSelf __weak __typeof(&*self)weakSelf = self
 #define HJStrongSelf __strong __typeof(&*self)strongSelf = weakSelf
 
+/** 公共分类 */
+#import "NSDate+HJ.h"
+#import "UIImage+HJ.h"
+
 #endif /* PrefixHeader_pch */
