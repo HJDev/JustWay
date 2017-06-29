@@ -2,16 +2,19 @@ PODS:
   - GCDWebServer (3.3.3):
     - GCDWebServer/Core (= 3.3.3)
   - GCDWebServer/Core (3.3.3)
+  - Masonry (1.0.2)
   - RDVTabBarController (1.1.9)
 
 DEPENDENCIES:
   - GCDWebServer
+  - Masonry
   - RDVTabBarController
 
 SPEC CHECKSUMS:
   GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   RDVTabBarController: 67794f7a7a37f8e32f046f85ac67d06ab92d624a
 
-PODFILE CHECKSUM: d3b66b32688f4e5cc9bfc0a3ef176742ec1d4877
+PODFILE CHECKSUM: 95d743cb26a658223192f04ba2661989c6f8b496
 
 COCOAPODS: 1.2.1

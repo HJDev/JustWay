@@ -41,6 +41,8 @@
 		795A0E341F03B64000F02FB4 /* HJWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E331F03B64000F02FB4 /* HJWeakTimer.m */; };
 		795A0E391F03B84B00F02FB4 /* HJMusicPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E381F03B84B00F02FB4 /* HJMusicPlayViewController.m */; };
 		795A0E3C1F04DC5600F02FB4 /* HJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */; };
+		795A0E4A1F04E7A700F02FB4 /* HJNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E491F04E7A700F02FB4 /* HJNewsTableViewCell.m */; };
+		795A0E4D1F04E7B800F02FB4 /* HJNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */; };
 		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
 		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,10 @@
 		795A0E381F03B84B00F02FB4 /* HJMusicPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayViewController.m; sourceTree = "<group>"; };
 		795A0E3A1F04DC5600F02FB4 /* HJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJBaseViewController.h; sourceTree = "<group>"; };
 		795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJBaseViewController.m; sourceTree = "<group>"; };
+		795A0E481F04E7A700F02FB4 /* HJNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJNewsTableViewCell.h; sourceTree = "<group>"; };
+		795A0E491F04E7A700F02FB4 /* HJNewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNewsTableViewCell.m; sourceTree = "<group>"; };
+		795A0E4B1F04E7B800F02FB4 /* HJNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJNewsModel.h; sourceTree = "<group>"; };
+		795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNewsModel.m; sourceTree = "<group>"; };
 		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
 		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -277,6 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				795A0DBC1F03407800F02FB4 /* Controller */,
+				795A0E3E1F04E5AF00F02FB4 /* Model */,
+				795A0E3D1F04E59F00F02FB4 /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -448,6 +456,24 @@
 				795A0E381F03B84B00F02FB4 /* HJMusicPlayViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		795A0E3D1F04E59F00F02FB4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				795A0E481F04E7A700F02FB4 /* HJNewsTableViewCell.h */,
+				795A0E491F04E7A700F02FB4 /* HJNewsTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		795A0E3E1F04E5AF00F02FB4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				795A0E4B1F04E7B800F02FB4 /* HJNewsModel.h */,
+				795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DAE8F1F147C12E71EB53D7DE /* Frameworks */ = {
@@ -763,12 +789,14 @@
 				795A0E2E1F0391E600F02FB4 /* HJTools.m in Sources */,
 				795A0DF01F034D5C00F02FB4 /* HJNavigationController.m in Sources */,
 				795A0E341F03B64000F02FB4 /* HJWeakTimer.m in Sources */,
+				795A0E4A1F04E7A700F02FB4 /* HJNewsTableViewCell.m in Sources */,
 				795A0CFE1F02336F00F02FB4 /* AppDelegate.m in Sources */,
 				795A0CFB1F02336F00F02FB4 /* main.m in Sources */,
 				795A0DF51F03532400F02FB4 /* UIImage+HJ.m in Sources */,
 				795A0DCD1F03428400F02FB4 /* HJFilesViewController.m in Sources */,
 				795A0DD01F03428E00F02FB4 /* HJMeViewController.m in Sources */,
 				795A0E091F037F5F00F02FB4 /* HJUploaderServer.m in Sources */,
+				795A0E4D1F04E7B800F02FB4 /* HJNewsModel.m in Sources */,
 				795A0E3C1F04DC5600F02FB4 /* HJBaseViewController.m in Sources */,
 				795A0E391F03B84B00F02FB4 /* HJMusicPlayViewController.m in Sources */,
 				795A0DCA1F0341D200F02FB4 /* HJNewsViewController.m in Sources */,
