@@ -110,22 +110,31 @@
 		NSString *fileDetail = @"";
 		fileDetail = [NSString stringWithFormat:@"%@",
 					  [NSByteCountFormatter stringFromByteCount:fileSize countStyle:NSByteCountFormatterCountStyleFile]];
-		NSDictionary *dic = @{@"title" : fileName, @"detail" : fileDetail};
 		HJNewsModel *model = [HJNewsModel new];
 		model.fileName = fileName;
 		model.fileSize = fileSize;
 		model.filePath = [self.fileDir stringByAppendingPathComponent:fileName];
+		model.createTime = (NSDate *)filesAttr[NSFileCreationDate];
+		model.fileType = filesAttr[NSFileType];
 		
-		NSString *dateStr = filesAttr[NSFileCreationDate];
-		NSDate *date = [NSDate dateWithFormatedTime:dateStr formate:@"yyyy-MM-dd HH:mm zzz"];
-//		model.createTime = [filesAttr[NSFileCreationDate] doubleValue];
-		
-		[fileList addObject:dic];
+		[fileList addObject:model];
 	}
 	
+	[fileList sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+		HJNewsModel *model1 = (HJNewsModel *)obj1;
+		HJNewsModel *model2 = (HJNewsModel *)obj2;
+		
+		if (model1.createTime == [model1.createTime laterDate:model2.createTime]) {
+			return NSOrderedAscending;
+		} else if (model1.createTime == [model1.createTime earlierDate:model2.createTime]) {
+			return NSOrderedDescending;
+		} else {
+			return NSOrderedSame;
+		}
+	}];
+	
 	HJLog(@"%@", files);
-	self.fileList = fileList;
-//	return fileList;
+	self.fileList = [fileList mutableCopy];
 }
 
 @end

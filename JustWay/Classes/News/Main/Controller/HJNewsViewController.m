@@ -84,6 +84,7 @@
 	UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:serverButton];
 	self.navigationItem.rightBarButtonItem = rightButton;
 	
+	self.edgesForExtendedLayout = UIRectEdgeTop;
 	UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
 	tableView.delegate = self;
 	tableView.dataSource = self;
@@ -135,22 +136,21 @@
 		cell = [[HJNewsTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:NSStringFromClass([HJNewsTableViewCell class])];
 	}
 	
-	NSDictionary *dic = [self.dataList objectAtIndex:indexPath.row];
-	cell.textLabel.text = dic[@"title"];
-	cell.detailTextLabel.text = dic[@"detail"];
+	HJNewsModel *model = self.dataList[indexPath.row];
+	cell.model = model;
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	NSDictionary *dic = self.dataList[indexPath.row];
-	NSString *fileName = dic[@"title"];
+	HJNewsModel *model = self.dataList[indexPath.row];
+//	NSString *fileName = dic[@"title"];
 	
-	if ([fileName hasSuffix:@".mp3"]) {
+	if ([model.fileName hasSuffix:@".mp3"]) {
 		HJMusicPlayViewController *mpVc = [HJMusicPlayViewController new];
-		mpVc.playUrl = [self.fileDir stringByAppendingPathComponent:fileName];
-		mpVc.title = fileName;
+		mpVc.playUrl = [self.fileDir stringByAppendingPathComponent:model.fileName];
+		mpVc.title = model.fileName;
 		[self.navigationController pushViewController:mpVc animated:YES];
 	}
 }

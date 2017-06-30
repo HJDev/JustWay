@@ -15,4 +15,9 @@
  */
 + (NSDate *)dateWithFormatedTime:(NSString *)formatedTime formate:(NSString *)formate;
 
+/**
+ * 格式化date
+ */
++ (NSString *)formateDate:(NSDate *)date formate:(NSString *)formate;
+
 @end

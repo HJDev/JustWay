@@ -26,4 +26,15 @@
 	return date;
 }
 
++ (NSString *)formateDate:(NSDate *)date formate:(NSString *)formate {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateStyle:NSDateFormatterMediumStyle];
+	[formatter setTimeStyle:NSDateFormatterShortStyle];
+	[formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Beijing"]];
+	
+	[formatter setDateFormat:formate];
+	
+	return [formatter stringFromDate:date];
+}
+
 @end

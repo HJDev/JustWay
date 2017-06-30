@@ -11,12 +11,14 @@
 @interface HJNewsModel : NSObject
 
 /** 文件名 */
-@property (nonatomic, copy)	  NSString		 *fileName;
+@property (nonatomic, copy)	  NSString	*fileName;
 /** 文件大小 */
-@property (nonatomic, assign) NSInteger		 fileSize;
+@property (nonatomic, assign) NSInteger	fileSize;
 /** 创建时间 */
-@property (nonatomic, assign) NSTimeInterval createTime;
+@property (nonatomic, strong) NSDate	*createTime;
 /** 文件路径 */
-@property (nonatomic, copy)	  NSString		 *filePath;
+@property (nonatomic, copy)	  NSString	*filePath;
+/** 文件类型 */
+@property (nonatomic, assign) NSString	*fileType;
 
 @end
