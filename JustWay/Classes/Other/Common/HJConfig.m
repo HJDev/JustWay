@@ -10,7 +10,7 @@
 
 #import <RDVTabBarController.h>
 #import <RDVTabBarItem.h>
-//#import "HJNavigationController.h"
+#import "HJNavigationController.h"
 #import "HJNewsViewController.h"
 #import "HJFilesViewController.h"
 #import "HJMeViewController.h"
@@ -25,15 +25,15 @@
 	
 	HJNewsViewController *newsVc = [HJNewsViewController new];
 	newsVc.title = @"动态";
-	UINavigationController *newsNav = [[UINavigationController alloc] initWithRootViewController:newsVc];
+	HJNavigationController *newsNav = [[HJNavigationController alloc] initWithRootViewController:newsVc];
 	
 	HJFilesViewController *filesVc = [HJFilesViewController new];
 	filesVc.title = @"文件";
-	UINavigationController *filesNav = [[UINavigationController alloc] initWithRootViewController:filesVc];
+	HJNavigationController *filesNav = [[HJNavigationController alloc] initWithRootViewController:filesVc];
 	
 	HJMeViewController *meVc = [HJMeViewController new];
 	meVc.title = @"我";
-	UINavigationController *meNav = [[UINavigationController alloc] initWithRootViewController:meVc];
+	HJNavigationController *meNav = [[HJNavigationController alloc] initWithRootViewController:meVc];
 	
 	[tabbar setViewControllers:@[newsNav, filesNav, meNav]];
 	

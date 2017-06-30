@@ -37,4 +37,8 @@
 	return [super popViewControllerAnimated:animated];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+	return [self.visibleViewController supportedInterfaceOrientations];
+}
+
 @end

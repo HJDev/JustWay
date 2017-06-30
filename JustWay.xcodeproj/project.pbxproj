@@ -53,6 +53,10 @@
 		790D330B1F050E4600491A7B /* ico_folder_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790D32DB1F050E4600491A7B /* ico_folder_small@2x.png */; };
 		790D330C1F050E4600491A7B /* ico_folder_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790D32DC1F050E4600491A7B /* ico_folder_small@3x.png */; };
 		790D330F1F050FE600491A7B /* NSDate+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D330E1F050FE600491A7B /* NSDate+HJ.m */; };
+		790D33131F06440200491A7B /* HJMusicPlayControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D33121F06440200491A7B /* HJMusicPlayControlView.m */; };
+		790D33161F06443E00491A7B /* HJMusicPlayLyricView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D33151F06443E00491A7B /* HJMusicPlayLyricView.m */; };
+		790D33191F06445800491A7B /* HJMusicPlayCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D33181F06445800491A7B /* HJMusicPlayCoverView.m */; };
+		790D331B1F064E2100491A7B /* MusicPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 790D331A1F064E2100491A7B /* MusicPlayer.bundle */; };
 		795A0CFB1F02336F00F02FB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0CFA1F02336F00F02FB4 /* main.m */; };
 		795A0CFE1F02336F00F02FB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0CFD1F02336F00F02FB4 /* AppDelegate.m */; };
 		795A0D011F02336F00F02FB4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0D001F02336F00F02FB4 /* ViewController.m */; };
@@ -160,6 +164,13 @@
 		790D32DC1F050E4600491A7B /* ico_folder_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ico_folder_small@3x.png"; sourceTree = "<group>"; };
 		790D330D1F050FE600491A7B /* NSDate+HJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HJ.h"; sourceTree = "<group>"; };
 		790D330E1F050FE600491A7B /* NSDate+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HJ.m"; sourceTree = "<group>"; };
+		790D33111F06440200491A7B /* HJMusicPlayControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayControlView.h; sourceTree = "<group>"; };
+		790D33121F06440200491A7B /* HJMusicPlayControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayControlView.m; sourceTree = "<group>"; };
+		790D33141F06443E00491A7B /* HJMusicPlayLyricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayLyricView.h; sourceTree = "<group>"; };
+		790D33151F06443E00491A7B /* HJMusicPlayLyricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayLyricView.m; sourceTree = "<group>"; };
+		790D33171F06445800491A7B /* HJMusicPlayCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayCoverView.h; sourceTree = "<group>"; };
+		790D33181F06445800491A7B /* HJMusicPlayCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayCoverView.m; sourceTree = "<group>"; };
+		790D331A1F064E2100491A7B /* MusicPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MusicPlayer.bundle; sourceTree = "<group>"; };
 		795A0CF61F02336F00F02FB4 /* JustWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795A0CFA1F02336F00F02FB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		795A0CFC1F02336F00F02FB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -301,8 +312,22 @@
 				790D32DA1F050E4600491A7B /* dir_grid_small_zip@3x.png */,
 				790D32DB1F050E4600491A7B /* ico_folder_small@2x.png */,
 				790D32DC1F050E4600491A7B /* ico_folder_small@3x.png */,
+				790D331A1F064E2100491A7B /* MusicPlayer.bundle */,
 			);
 			path = News;
+			sourceTree = "<group>";
+		};
+		790D33101F0643DB00491A7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				790D33111F06440200491A7B /* HJMusicPlayControlView.h */,
+				790D33121F06440200491A7B /* HJMusicPlayControlView.m */,
+				790D33141F06443E00491A7B /* HJMusicPlayLyricView.h */,
+				790D33151F06443E00491A7B /* HJMusicPlayLyricView.m */,
+				790D33171F06445800491A7B /* HJMusicPlayCoverView.h */,
+				790D33181F06445800491A7B /* HJMusicPlayCoverView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		791EB45269B0B8ADEA88EF84 /* Pods */ = {
@@ -589,6 +614,7 @@
 		795A0E351F03B80900F02FB4 /* MusicPlay */ = {
 			isa = PBXGroup;
 			children = (
+				790D33101F0643DB00491A7B /* View */,
 				795A0E361F03B82900F02FB4 /* Controller */,
 			);
 			path = MusicPlay;
@@ -802,6 +828,7 @@
 				790D32E41F050E4600491A7B /* dir_grid_small_bmp@3x.png in Resources */,
 				790D32FD1F050E4600491A7B /* dir_grid_small_psd@2x.png in Resources */,
 				790D32DF1F050E4600491A7B /* dir_grid_small_apk@2x.png in Resources */,
+				790D331B1F064E2100491A7B /* MusicPlayer.bundle in Resources */,
 				790D32E71F050E4600491A7B /* dir_grid_small_hlp@2x.png in Resources */,
 				790D32FB1F050E4600491A7B /* dir_grid_small_ppt@2x.png in Resources */,
 				790D32FA1F050E4600491A7B /* dir_grid_small_pdf@3x.png in Resources */,
@@ -979,10 +1006,13 @@
 				795A0E2E1F0391E600F02FB4 /* HJTools.m in Sources */,
 				795A0DF01F034D5C00F02FB4 /* HJNavigationController.m in Sources */,
 				795A0E341F03B64000F02FB4 /* HJWeakTimer.m in Sources */,
+				790D33191F06445800491A7B /* HJMusicPlayCoverView.m in Sources */,
 				795A0E4A1F04E7A700F02FB4 /* HJNewsTableViewCell.m in Sources */,
 				795A0CFE1F02336F00F02FB4 /* AppDelegate.m in Sources */,
+				790D33161F06443E00491A7B /* HJMusicPlayLyricView.m in Sources */,
 				795A0CFB1F02336F00F02FB4 /* main.m in Sources */,
 				795A0DF51F03532400F02FB4 /* UIImage+HJ.m in Sources */,
+				790D33131F06440200491A7B /* HJMusicPlayControlView.m in Sources */,
 				795A0DCD1F03428400F02FB4 /* HJFilesViewController.m in Sources */,
 				795A0DD01F03428E00F02FB4 /* HJMeViewController.m in Sources */,
 				795A0E091F037F5F00F02FB4 /* HJUploaderServer.m in Sources */,

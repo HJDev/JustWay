@@ -30,6 +30,11 @@
 	HJLog(@"%s", __func__);
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+	[super supportedInterfaceOrientations];
+	return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	HJLog(@"%s", __func__);
 }
