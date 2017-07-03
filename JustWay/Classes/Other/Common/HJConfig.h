@@ -16,4 +16,9 @@
  */
 + (UIViewController *)configTabBar;
 
+/**
+ * 配置后台播放
+ */
++ (void)configBackgoundPlayTask;
+
 @end

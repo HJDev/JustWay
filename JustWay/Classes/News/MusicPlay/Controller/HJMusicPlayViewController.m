@@ -13,6 +13,7 @@
 #import "HJMusicPlayer.h"
 #import <Masonry.h>
 
+
 @interface HJMusicPlayViewController ()
 
 /** 播放器控制View */
@@ -31,26 +32,21 @@
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	[self setupViews];
-	if (self.playUrl.length == 0) {
-		return;
-	}
-	NSFileManager *fm = [NSFileManager defaultManager];
-	BOOL exit = [fm fileExistsAtPath:self.playUrl];
-	NSURL *url = nil;
-	if (exit) {
-		url = [NSURL fileURLWithPath:self.playUrl];
-	} else {
-		url = [NSURL URLWithString:self.playUrl];
-	}
-	if (url != nil) {
-		[[HJMusicPlayer sharedInstance] playWithUrl:url];
-		[[HJMusicPlayer sharedInstance] addObserver:self forKeyPath:@"currentTime" options:NSKeyValueObservingOptionNew context:nil];
-		HJWeakSelf;
-		[[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
-			[weakSelf.controlView setCurrentTime:currentTime];
-		}];
-		[self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
-	}
+    [self startPlayWithUrl:self.playUrl];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [[UIApplication sharedApplication] resignFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [[UIApplication sharedApplication] becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,6 +56,95 @@
 
 - (void)dealloc {
 	HJLog(@"%s", __func__);
+}
+
+/**
+ * 开始播放
+ */
+- (void)startPlayWithUrl:(NSString *)urlStr {
+    if (urlStr.length == 0) {
+        return;
+    }
+    NSFileManager *fm = [NSFileManager defaultManager];
+    BOOL exit = [fm fileExistsAtPath:urlStr];
+    NSURL *url = nil;
+//    if (exit) {
+        url = [NSURL fileURLWithPath:urlStr];
+//    } else {
+//        url = [NSURL URLWithString:urlStr];
+//    }
+    if (url != nil) {
+        [[HJMusicPlayer sharedInstance] playWithUrl:url];
+        [[HJMusicPlayer sharedInstance] addObserver:self forKeyPath:@"currentTime" options:NSKeyValueObservingOptionNew context:nil];
+        HJWeakSelf;
+        //播放进度更新
+        [[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
+            [weakSelf.controlView setCurrentTime:currentTime];
+        }];
+        //播放完成
+        [[HJMusicPlayer sharedInstance] setPlayEndBlock:^(NSURL *playUrl) {
+            if ([playUrl.absoluteString hasSuffix:@".mp3"]) {
+//                NSURL *url = [NSURL fileURLWithPath:@"/var/mobile/Containers/Data/Application/59CC5090-6487-49F4-8745-7AA5640DAD83/Documents/she - 美丽新世界.m4a"];
+//                [[HJMusicPlayer sharedInstance] playWithUrl:url];
+                [weakSelf startPlayWithUrl:@"/var/mobile/Containers/Data/Application/59CC5090-6487-49F4-8745-7AA5640DAD83/Documents/she - 美丽新世界.m4a"];
+            } else {
+//                NSURL *url = [NSURL URLWithString:@"http://122.228.254.11/mp32.9ku.com/upload/2015/11/16/667848.mp3"];
+//                [[HJMusicPlayer sharedInstance] playWithUrl:url];
+//                [weakSelf startPlayWithUrl:@"http://122.228.254.11/mp32.9ku.com/upload/2015/11/16/667848.mp3"];
+                [weakSelf startPlayWithUrl:@"/var/mobile/Containers/Data/Application/BE808683-1DAA-4BA6-8868-7CDE5BC853AC/Documents/大王叫我来巡山.mp3"];
+            }
+        }];
+        [self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
+    }
+}
+
+#pragma mark - 接受远程控制事件
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+    HJLog(@"%@", event);
+    if (event.type == UIEventTypeRemoteControl) {
+        switch (event.subtype) {
+            case UIEventSubtypeRemoteControlPlay:
+                HJLog(@"控制中心播放");
+                [[HJMusicPlayer sharedInstance] resume];
+                break;
+            case UIEventSubtypeRemoteControlPause: {
+                HJLog(@"控制中心暂停");
+                [[HJMusicPlayer sharedInstance] pause];
+                break;
+            }
+            case UIEventSubtypeRemoteControlStop: {
+                HJLog(@"停止");
+                [[HJMusicPlayer sharedInstance] stopPlay];
+                break;
+            }
+            case UIEventSubtypeRemoteControlNextTrack: {
+                HJLog(@"下一首");
+                break;
+            }
+            case UIEventSubtypeRemoteControlPreviousTrack: {
+                HJLog(@"上一首");
+                break;
+            }
+            case UIEventSubtypeRemoteControlTogglePlayPause: {
+                HJLog(@"耳机相控暂停");
+                if ([HJMusicPlayer sharedInstance].isPlaying) {
+                    [[HJMusicPlayer sharedInstance] pause];
+                    [self.coverView setPlaying:NO];
+                } else {
+                    [[HJMusicPlayer sharedInstance] resume];
+                    [self.coverView setPlaying:YES];
+                }
+                break;
+            }
+                
+            default:
+                break;
+        }
+    }
 }
 
 /**

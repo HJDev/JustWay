@@ -57,6 +57,13 @@
     return self;
 }
 
+#pragma mark - setter
+- (void)setPlaying:(BOOL)playing {
+    _playing = playing;
+    
+    [self handleMainTap];
+}
+
 #pragma mark - user event
 /**
  * 点击View

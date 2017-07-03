@@ -10,6 +10,8 @@
 
 @interface HJMusicPlayCoverView : UIView
 
+/** 播放状态(YES : 正在播放 NO : 暂停) */
+@property (nonatomic, assign) BOOL playing;
 /**
  * 添加封面旋转动画
  */

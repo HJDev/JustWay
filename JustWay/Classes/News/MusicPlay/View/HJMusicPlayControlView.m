@@ -48,6 +48,8 @@
 	NSInteger min = duration / 60;
 	NSInteger sec = duration % 60;
 	self.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", min, sec];
+    
+    [self.slider setMaximumValue:duration];
 }
 
 - (void)setCurrentTime:(NSInteger)currentTime {
@@ -56,6 +58,8 @@
 	NSInteger min = currentTime / 60;
 	NSInteger sec = currentTime % 60;
 	self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", min, sec];
+    
+    [self.slider setValue:currentTime animated:YES];
 }
 
 /**

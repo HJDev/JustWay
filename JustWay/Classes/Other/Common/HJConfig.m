@@ -15,6 +15,8 @@
 #import "HJFilesViewController.h"
 #import "HJMeViewController.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 @implementation HJConfig
 
 /**
@@ -51,6 +53,17 @@
 	}
 	
 	return tabbar;
+}
+
+/**
+ * 配置后台播放
+ */
++ (void)configBackgoundPlayTask {
+    //实现后台播放
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    //默认情况下扬声器播放
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [audioSession setActive:YES error:nil];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "HJConfig.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -21,6 +22,9 @@
 	self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 	self.window.rootViewController = [HJConfig configTabBar];
 	[self.window makeKeyAndVisible];
+    
+    //配置后台播放
+    [HJConfig configBackgoundPlayTask];
 	return YES;
 }
 

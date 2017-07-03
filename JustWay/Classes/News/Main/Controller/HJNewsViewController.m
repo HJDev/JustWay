@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.serverPort = 8080;
+	self.serverPort = 8081;
 	
 	[self setupViews];
 	[self initData];

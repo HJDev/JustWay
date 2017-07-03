@@ -95,6 +95,9 @@
 - (BOOL)isMuted {
 	return self.player.isMuted;
 }
+- (BOOL)isPlaying {
+    return self.player.rate == 1.0;
+}
 
 #pragma mark - func player
 /**
@@ -123,6 +126,9 @@
 	HJLog(@"播放完成");
 	
 	if (self.player) {
+        if (self.playEndBlock) {
+            self.playEndBlock(self.playUrl);
+        }
 		[self.player pause];
 		
 		[self.player.currentItem cancelPendingSeeks];
