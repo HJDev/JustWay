@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.serverPort = 80;
+	self.serverPort = 8080;
 	
 	[self setupViews];
 	[self initData];
@@ -89,6 +89,7 @@
 	tableView.delegate = self;
 	tableView.dataSource = self;
 	tableView.rowHeight = 55.0f;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.view addSubview:tableView];
 	self.tableView = tableView;
 }

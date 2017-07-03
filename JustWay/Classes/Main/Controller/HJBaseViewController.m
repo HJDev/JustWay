@@ -36,11 +36,11 @@
 }
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-	HJLog(@"%s", __func__);
+//	HJLog(@"%s", __func__);
 }
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-	HJLog(@"%s", __func__);
+//	HJLog(@"%s", __func__);
 	if (self.navigationController.viewControllers.count > 1) {
 		[self.rdv_tabBarController setTabBarHidden:YES animated:YES];
 	} else {

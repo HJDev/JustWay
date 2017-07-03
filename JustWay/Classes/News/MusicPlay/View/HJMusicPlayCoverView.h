@@ -10,4 +10,9 @@
 
 @interface HJMusicPlayCoverView : UIView
 
+/**
+ * 添加封面旋转动画
+ */
+- (void)setupCycleAnimation;
+
 @end

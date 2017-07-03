@@ -137,26 +137,28 @@
 	CGFloat sliderMarginTop = 10;
 	[self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.mas_equalTo(weakSelf.currentTimeLabel.mas_right).offset(sliderMarginLeft);
-		make.right.mas_equalTo(weakSelf.totalTimeLabel.mas_left).offset(-sliderMarginLeft);
+		make.right.mas_equalTo(weakSelf.totalTimeLabel.mas_left).offset(-sliderMarginLeft).priorityLow();
 		make.top.mas_equalTo(weakSelf).offset(sliderMarginTop);
 	}];
-	
+    if (iPhone4) {
+        sliderMarginTop = 0;
+    }
 	[self.playBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.right.bottom.mas_equalTo(weakSelf);
-		make.top.mas_equalTo(weakSelf.slider.mas_bottom).offset(sliderMarginTop);
+		make.top.mas_equalTo(weakSelf.slider.mas_bottom).offset(sliderMarginTop).priorityLow();
 	}];
 	CGFloat playModeMarginLeft = 15;
 	[self.playModeButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.size.mas_equalTo(weakSelf.playModeButton.imageView.image.size);
 		make.left.mas_equalTo(weakSelf.playBottomView).offset(playModeMarginLeft);
 		make.centerY.mas_equalTo(weakSelf.playButton);
-	}];
+    }];
 	[self.playListButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.size.mas_equalTo(weakSelf.playListButton.imageView.image.size);
 		make.right.mas_equalTo(weakSelf.playBottomView).offset(-playModeMarginLeft);
 		make.centerY.mas_equalTo(weakSelf.playButton);
 	}];
-	
+    
 	[self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.size.mas_equalTo(weakSelf.playButton.imageView.image.size);
 		make.centerY.mas_equalTo(weakSelf.playBottomView);
@@ -167,7 +169,7 @@
 		make.size.mas_equalTo(weakSelf.previewButton.imageView.image.size);
 		make.right.mas_equalTo(weakSelf.playButton.mas_left).offset(-previewButtonMarginRight);
 		make.centerY.mas_equalTo(weakSelf.playButton);
-	}];
+    }];
 	[self.nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.size.mas_equalTo(weakSelf.nextButton.imageView.image.size);
 		make.left.mas_equalTo(weakSelf.playButton.mas_right).offset(previewButtonMarginRight);

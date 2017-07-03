@@ -37,18 +37,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	
-	HJLog(@"%s", __func__)
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-	
-	HJLog(@"%s", __func__);
-}
-
 - (void)dealloc {
 	HJLog(@"%s", __func__);
 }
@@ -57,16 +45,17 @@
  * 初始化控件
  */
 - (void)setupViews {
-	//播放器音乐封面
-	HJMusicPlayCoverView *coverView = [HJMusicPlayCoverView new];
-	coverView.backgroundColor = HJRANDOM;
-	[self.view addSubview:coverView];
-	self.coverView = coverView;
-	
 	HJMusicPlayLyricView *lyricView = [HJMusicPlayLyricView new];
 	lyricView.backgroundColor = HJRANDOM;
 	[self.view addSubview:lyricView];
 	self.lyricView = lyricView;
+    
+    //播放器音乐封面
+    HJMusicPlayCoverView *coverView = [HJMusicPlayCoverView new];
+    coverView.backgroundColor = HJRANDOM;
+    [self.view addSubview:coverView];
+    self.coverView = coverView;
+    [self.coverView setupCycleAnimation];
 	
 	//播放器控制View
 	HJMusicPlayControlView *controlView = [HJMusicPlayControlView new];
@@ -83,17 +72,22 @@
 - (void)setupConstraints {
 	HJWeakSelf;
 	[self.coverView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.top.left.right.mas_equalTo(weakSelf.view);
+		make.left.right.mas_equalTo(weakSelf.view);
+        make.top.mas_equalTo(weakSelf.view).offset(64);
 	}];
 	
 	[self.lyricView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.right.top.bottom.mas_equalTo(weakSelf.coverView);
 	}];
 	
+    CGFloat controlViewHeight = 150;
+    if (iPhone4) {
+        controlViewHeight = 120;
+    }
 	[self.controlView mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.top.mas_equalTo(weakSelf.coverView.mas_bottom);
 		make.left.right.bottom.mas_equalTo(weakSelf.view);
-		make.height.mas_equalTo(150);
+		make.height.mas_equalTo(controlViewHeight);
 	}];
 }
 

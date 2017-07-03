@@ -92,6 +92,7 @@
 		795A0E3C1F04DC5600F02FB4 /* HJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */; };
 		795A0E4A1F04E7A700F02FB4 /* HJNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E491F04E7A700F02FB4 /* HJNewsTableViewCell.m */; };
 		795A0E4D1F04E7B800F02FB4 /* HJNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */; };
+		795DB7B11F068D9C00172BD4 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 795DB7B01F068D9C00172BD4 /* image.png */; };
 		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
 		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
 /* End PBXBuildFile section */
@@ -230,6 +231,7 @@
 		795A0E491F04E7A700F02FB4 /* HJNewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNewsTableViewCell.m; sourceTree = "<group>"; };
 		795A0E4B1F04E7B800F02FB4 /* HJNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJNewsModel.h; sourceTree = "<group>"; };
 		795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNewsModel.m; sourceTree = "<group>"; };
+		795DB7B01F068D9C00172BD4 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
 		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 			children = (
 				795A0E371F03B84B00F02FB4 /* HJMusicPlayViewController.h */,
 				795A0E381F03B84B00F02FB4 /* HJMusicPlayViewController.m */,
+				795DB7B01F068D9C00172BD4 /* image.png */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				790D330A1F050E4600491A7B /* dir_grid_small_zip@3x.png in Resources */,
 				790D32E61F050E4600491A7B /* dir_grid_small_doc@3x.png in Resources */,
 				790D33061F050E4600491A7B /* dir_grid_small_xls@3x.png in Resources */,
+				795DB7B11F068D9C00172BD4 /* image.png in Resources */,
 				795A0E1E1F03804B00F02FB4 /* tab_ic_file@3x.png in Resources */,
 				790D33001F050E4600491A7B /* dir_grid_small_swf@3x.png in Resources */,
 				790D32DD1F050E4600491A7B /* dir_grid_small_ai@2x.png in Resources */,

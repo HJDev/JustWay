@@ -18,6 +18,8 @@
 @property (nonatomic, weak) UILabel		*titleLabel;
 /** 文件详细信息 */
 @property (nonatomic, weak) UILabel		*subTitleLabel;
+/** 分割线 */
+@property (nonatomic, weak) UIView      *separateLine;
 
 @end
 
@@ -47,6 +49,12 @@
 	subTitleLabel.textColor = HJRGB(155, 155, 155);
 	[self.contentView addSubview:subTitleLabel];
 	self.subTitleLabel = subTitleLabel;
+    
+    UIView *separateLine = [UIView new];
+    separateLine.backgroundColor = [UIColor lightGrayColor];
+    separateLine.alpha = 0.5;
+    [self.contentView addSubview:separateLine];
+    self.separateLine = separateLine;
 	
 	[self setupConstraints];
 }
@@ -63,7 +71,7 @@
 	}];
 	
 	[self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.left.mas_equalTo(weakSelf.iconView.mas_right).offset(5);
+		make.left.mas_equalTo(weakSelf.iconView.mas_right).offset(10);
 		make.top.mas_equalTo(weakSelf.iconView);
 		make.height.mas_equalTo(weakSelf.titleLabel.font.lineHeight);
 		make.right.mas_lessThanOrEqualTo(weakSelf.contentView).offset(-10);
@@ -75,6 +83,12 @@
 		make.height.mas_equalTo(weakSelf.subTitleLabel.font.lineHeight);
 		make.right.mas_lessThanOrEqualTo(weakSelf.contentView).offset(-10);
 	}];
+    
+    [self.separateLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(weakSelf.titleLabel);
+        make.right.bottom.mas_equalTo(weakSelf.contentView);
+        make.height.mas_equalTo(1);
+    }];
 }
 
 - (void)setModel:(HJNewsModel *)model {
