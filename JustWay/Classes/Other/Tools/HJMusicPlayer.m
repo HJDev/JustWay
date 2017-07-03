@@ -15,7 +15,7 @@
 /** 播放器 */
 @property (nonatomic, strong) AVPlayer *player;
 /** 播放器定时器 */
-@property (nonatomic, strong) NSTimer *playerTimer;
+@property (nonatomic, strong) id timeObserver;
 
 @end
 
@@ -33,36 +33,37 @@
 #pragma mark - 播放音频
 /** 开始播放 */
 - (void)playWithUrl:(NSURL *)url {
-	_playUrl = url;
 	if ([url.absoluteString isEqualToString:self.playUrl.absoluteString]) {
 		return;
 	}
+	_playUrl = url;
+	_duration = 0;
 	
 	AVURLAsset *asset = [AVURLAsset assetWithURL:url];
+	_duration = CMTimeGetSeconds(asset.duration);
 	if (self.player.currentItem) {
 		[self clearObserver];
 	}
 	
-//	self.observerCount++;
 	AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
 	[item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
 	[item addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+	//监控缓冲加载情况属性
+	[item addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playEnd) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playInterrupt) name:AVPlayerItemPlaybackStalledNotification object:nil];
 	
 	self.player = [AVPlayer playerWithPlayerItem:item];
 	
-	if (self.playerTimer) {
-		[self.playerTimer invalidate];
-		self.playerTimer = nil;
-	}
-	self.playerTimer = [HJWeakTimer scheduledTimerWithTimeInterval:1 block:^(id userInfo) {
-		if (self.player.currentItem.currentTime.value > 0) {
-			_playUrl = url;
-			[self.playerTimer invalidate];
-			self.playerTimer = nil;
+	HJWeakSelf;
+	[self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+		//在这里将监听到的播放进度代理出去，对进度条进行设置
+		UInt64 currentTime = weakSelf.player.currentTime.value / weakSelf.player.currentTime.timescale;
+		if (weakSelf.playProgressBlock) {
+			weakSelf.playProgressBlock(currentTime);
 		}
-	} userInfo:nil repeats:YES];
+	}];
+	
 }
 
 /** 停止播放 */
@@ -72,13 +73,6 @@
 		[self clearObserver];
 		self.player = nil;
 	}
-	
-//	[self finishPreviewActionWithInterrupt:NO];
-//	self.currentStatus = DSAudioToolStatusPlayEnd;
-//	_playUrl = nil;
-//	if (self.url) {
-//		_playUrl = self.url;
-//	}
 }
 /** 继续播放 */
 - (void)resume {
@@ -110,6 +104,8 @@
 	@try {
 		[self.player.currentItem removeObserver:self forKeyPath:@"status" context:nil];
 		[self.player.currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
+		[self.player.currentItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
+		[self.player removeTimeObserver:self.timeObserver];
 		
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
@@ -140,11 +136,7 @@
 		
 	}
 	
-//	[self finishPreviewActionWithInterrupt:NO];
 	_playUrl = nil;
-	//	if (self.url) {
-	//		_playUrl = self.url;
-	//	}
 }
 
 /**
@@ -152,8 +144,6 @@
  */
 - (void)playInterrupt {
 	HJLog(@"播放被打断");
-//	[self finishPreviewActionWithInterrupt:NO];
-//	self.currentStatus = DSAudioToolStatusPlayEnd;
 }
 
 #pragma mark - KVO
@@ -165,28 +155,15 @@
 		switch (status) {
 			case AVPlayerItemStatusUnknown: {
 				HJLog(@"资源无效");
-//				[self finishPreviewActionWithInterrupt:NO];
-//				self.currentStatus = DSAudioToolStatusPlayEnd;
-				
-				//				NSDictionary *userInfo = @{@"url" : self.url ? : @"", @"status" : @(DSAudioToolStatusPlayFail)};
-				//				[[NSNotificationCenter defaultCenter] postNotificationName:DSAudioToolPlayItem object:nil userInfo:userInfo];
 				break;
 			}
 			case AVPlayerItemStatusReadyToPlay: {
-				//				HJLog(@"资源准备好了, 已经可以播放");
+				//HJLog(@"资源准备好了, 已经可以播放");
 				[self resume];
-				
-				//				NSDictionary *userInfo = @{@"url" : self.url ? : @"", @"status" : @(DSAudioToolStatusPlaying)};
-				//				[[NSNotificationCenter defaultCenter] postNotificationName:DSAudioToolPlayItem object:nil userInfo:userInfo];
 				break;
 			}
 			case AVPlayerItemStatusFailed: {
 				HJLog(@"资源加载失败");
-//				[self finishPreviewActionWithInterrupt:NO];
-//				self.currentStatus = DSAudioToolStatusPlayEnd;
-				
-				//				NSDictionary *userInfo = @{@"url" : self.url ? : @"", @"status" : @(DSAudioToolStatusPlayFail)};
-				//				[[NSNotificationCenter defaultCenter] postNotificationName:DSAudioToolPlayItem object:nil userInfo:userInfo];
 				break;
 			}
 				
@@ -194,7 +171,7 @@
 				break;
 		}
 	} else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
-		//		HJLog(@"playbackLikelyToKeepUp");
+		//HJLog(@"playbackLikelyToKeepUp");
 		BOOL playbackLikelyToKeepUp = [change[NSKeyValueChangeNewKey] boolValue];
 		if (playbackLikelyToKeepUp) {
 			//			HJLog(@"资源加载的可以播放了");
@@ -209,6 +186,15 @@
 			
 			//			HJLog(@"资源正在加载");
 		}
+	} else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+		NSArray *array = self.player.currentItem.loadedTimeRanges;
+		//本次缓冲时间范围
+		CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];
+		float startSeconds = CMTimeGetSeconds(timeRange.start);
+		float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+		//缓冲总长度
+		NSTimeInterval totalBuffer = startSeconds + durationSeconds;
+		HJLog(@"共缓冲：%.2f  ,   %.2f    ,  %.2f",totalBuffer, startSeconds, durationSeconds);
 	}
 }
 

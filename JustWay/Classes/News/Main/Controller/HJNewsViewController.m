@@ -147,9 +147,8 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	HJNewsModel *model = self.dataList[indexPath.row];
-//	NSString *fileName = dic[@"title"];
 	
-	if ([model.fileName hasSuffix:@".mp3"]) {
+	if ([model.fileName hasSuffix:@".mp3"] || [model.fileName hasSuffix:@".m4a"]) {
 		HJMusicPlayViewController *mpVc = [HJMusicPlayViewController new];
 		mpVc.playUrl = [self.fileDir stringByAppendingPathComponent:model.fileName];
 		mpVc.title = model.fileName;

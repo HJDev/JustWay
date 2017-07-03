@@ -10,6 +10,7 @@
 #import "HJMusicPlayControlView.h"
 #import "HJMusicPlayLyricView.h"
 #import "HJMusicPlayCoverView.h"
+#import "HJMusicPlayer.h"
 #import <Masonry.h>
 
 @interface HJMusicPlayViewController ()
@@ -30,6 +31,26 @@
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	[self setupViews];
+	if (self.playUrl.length == 0) {
+		return;
+	}
+	NSFileManager *fm = [NSFileManager defaultManager];
+	BOOL exit = [fm fileExistsAtPath:self.playUrl];
+	NSURL *url = nil;
+	if (exit) {
+		url = [NSURL fileURLWithPath:self.playUrl];
+	} else {
+		url = [NSURL URLWithString:self.playUrl];
+	}
+	if (url != nil) {
+		[[HJMusicPlayer sharedInstance] playWithUrl:url];
+		[[HJMusicPlayer sharedInstance] addObserver:self forKeyPath:@"currentTime" options:NSKeyValueObservingOptionNew context:nil];
+		HJWeakSelf;
+		[[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
+			[weakSelf.controlView setCurrentTime:currentTime];
+		}];
+		[self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
+	}
 }
 
 - (void)didReceiveMemoryWarning {

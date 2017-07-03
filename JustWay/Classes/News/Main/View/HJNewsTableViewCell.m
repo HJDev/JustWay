@@ -107,7 +107,7 @@
 }
 
 - (NSString *)getFileTypeIconNameWithFileName:(NSString *)fileName {
-	if ([fileName hasSuffix:@".mp3"]) {
+	if ([fileName hasSuffix:@".mp3"] || [fileName hasSuffix:@".m4a"]) {
 		return @"dir_grid_small_mp3";
 	} else if ([fileName hasSuffix:@".mp4"]) {
 		return @"dir_grid_small_mov";

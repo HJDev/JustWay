@@ -59,7 +59,6 @@
 		790D331B1F064E2100491A7B /* MusicPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 790D331A1F064E2100491A7B /* MusicPlayer.bundle */; };
 		795A0CFB1F02336F00F02FB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0CFA1F02336F00F02FB4 /* main.m */; };
 		795A0CFE1F02336F00F02FB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0CFD1F02336F00F02FB4 /* AppDelegate.m */; };
-		795A0D011F02336F00F02FB4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0D001F02336F00F02FB4 /* ViewController.m */; };
 		795A0D061F02336F00F02FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 795A0D051F02336F00F02FB4 /* Assets.xcassets */; };
 		795A0D091F02336F00F02FB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795A0D071F02336F00F02FB4 /* LaunchScreen.storyboard */; };
 		795A0D141F02336F00F02FB4 /* JustWayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0D131F02336F00F02FB4 /* JustWayTests.m */; };
@@ -176,8 +175,6 @@
 		795A0CFA1F02336F00F02FB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		795A0CFC1F02336F00F02FB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		795A0CFD1F02336F00F02FB4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		795A0CFF1F02336F00F02FB4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		795A0D001F02336F00F02FB4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		795A0D051F02336F00F02FB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		795A0D081F02336F00F02FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		795A0D0A1F02336F00F02FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -373,8 +370,6 @@
 				795A0DB21F033F3400F02FB4 /* Classes */,
 				795A0CFC1F02336F00F02FB4 /* AppDelegate.h */,
 				795A0CFD1F02336F00F02FB4 /* AppDelegate.m */,
-				795A0CFF1F02336F00F02FB4 /* ViewController.h */,
-				795A0D001F02336F00F02FB4 /* ViewController.m */,
 				795A0D051F02336F00F02FB4 /* Assets.xcassets */,
 				795A0D071F02336F00F02FB4 /* LaunchScreen.storyboard */,
 				795A0CF91F02336F00F02FB4 /* Supporting Files */,
@@ -739,6 +734,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = UVTAS8R4A5;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					795A0D0E1F02336F00F02FB4 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -1005,7 +1005,6 @@
 				795A0E0F1F03803500F02FB4 /* GCDWebUploader.m in Sources */,
 				795A0E2B1F038BF200F02FB4 /* HJConfig.m in Sources */,
 				790D330F1F050FE600491A7B /* NSDate+HJ.m in Sources */,
-				795A0D011F02336F00F02FB4 /* ViewController.m in Sources */,
 				795A0E311F03B43200F02FB4 /* HJMusicPlayer.m in Sources */,
 				795A0E2E1F0391E600F02FB4 /* HJTools.m in Sources */,
 				795A0DF01F034D5C00F02FB4 /* HJNavigationController.m in Sources */,

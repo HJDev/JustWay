@@ -10,4 +10,9 @@
 
 @interface HJMusicPlayControlView : UIView
 
+/** 当前播放进度 */
+@property (nonatomic, assign) NSInteger currentTime;
+/** 总时长 */
+@property (nonatomic, assign) NSInteger duration;
+
 @end
