@@ -9,6 +9,9 @@
 #import "HJMusicPlayControlView.h"
 #import <Masonry.h>
 
+/** 播放器资源包 */
+#define HJMusicPlayBundle @"MusicPlayer.bundle"
+
 @interface HJMusicPlayControlView()
 
 /** 当前播放时间 */
@@ -84,11 +87,9 @@
 	[self addSubview:totalTimeLabel];
 	self.totalTimeLabel = totalTimeLabel;
 	
-	//资源包
-	NSString *bundleName = @"MusicPlayer.bundle";
 	//播放进度滑竿
 	UISlider *slider = [UISlider new];
-	[slider setThumbImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_fm_playbar_btn"]] forState:UIControlStateNormal];
+	[slider setThumbImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_playbar_btn"]] forState:UIControlStateNormal];
 	[slider setMinimumTrackTintColor:HJRGB(211, 57, 49)];
 	[slider setMaximumTrackTintColor:HJRGB(116, 151, 173)];
 	[self addSubview:slider];
@@ -100,40 +101,123 @@
 	
 	//播放模式
 	UIButton *playModeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[playModeButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_play_btn_loop"]] forState:UIControlStateNormal];
-	[playModeButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_play_btn_loop_prs"]] forState:UIControlStateHighlighted];
+	[playModeButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop"]] forState:UIControlStateNormal];
+	[playModeButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop_prs"]] forState:UIControlStateHighlighted];
+	playModeButton.tag = HJMusicPlayActionAllCycle;
+	[playModeButton addTarget:self action:@selector(handlePlayModeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:playModeButton];
 	self.playModeButton = playModeButton;
 	
 	//播放列表按钮
 	UIButton *playListButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[playListButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_play_btn_src"]] forState:UIControlStateNormal];
-	[playListButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_play_btn_src_prs"]] forState:UIControlStateNormal];
+	[playListButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_src"]] forState:UIControlStateNormal];
+	[playListButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_src_prs"]] forState:UIControlStateNormal];
+	[playListButton addTarget:self action:@selector(handlePlayListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:playListButton];
 	self.playListButton = playListButton;
 	
 	//上一首按钮
 	UIButton *previewButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[previewButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_play_btn_prev"]] forState:UIControlStateNormal];
-	[previewButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_play_btn_prev_prs"]] forState:UIControlStateHighlighted];
+	[previewButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_prev"]] forState:UIControlStateNormal];
+	[previewButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_prev_prs"]] forState:UIControlStateHighlighted];
+	[previewButton addTarget:self action:@selector(handlePreviewButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:previewButton];
 	self.previewButton = previewButton;
 	
 	//播放按钮
 	UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[playButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_runfm_btn_play"]] forState:UIControlStateNormal];
-	[playButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_runfm_btn_play_prs"]] forState:UIControlStateHighlighted];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play"]] forState:UIControlStateNormal];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play_prs"]] forState:UIControlStateHighlighted];
+	
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause"]] forState:UIControlStateSelected];
+	[playButton addTarget:self action:@selector(handlePlayButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:playButton];
 	self.playButton = playButton;
 	
 	//下一首按钮
 	UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[nextButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_runfm_btn_next"]] forState:UIControlStateNormal];
-	[nextButton setImage:[UIImage imageWithUnCachedName:[bundleName stringByAppendingPathComponent:@"cm2_runfm_btn_next_prs"]] forState:UIControlStateHighlighted];
+	[nextButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_runfm_btn_next"]] forState:UIControlStateNormal];
+	[nextButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_runfm_btn_next_prs"]] forState:UIControlStateHighlighted];
+	[nextButton addTarget:self action:@selector(handleNextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:nextButton];
 	self.nextButton = nextButton;
 	
 	[self setupConstraints];
+}
+
+#pragma mark - user event
+/**
+ * 点击播放模式按钮
+ */
+- (void)handlePlayModeButtonClick:(UIButton *)button {
+	if (button.tag == HJMusicPlayActionAllCycle) {
+		button.tag = HJMusicPlayActionSingleCycle;
+		
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_one"]] forState:UIControlStateNormal];
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_one_prs"]] forState:UIControlStateHighlighted];
+		
+		if (self.actionChangeBlock) {
+			self.actionChangeBlock(HJMusicPlayActionSingleCycle);
+		}
+	} else if (button.tag == HJMusicPlayActionSingleCycle) {
+		button.tag = HJMusicPlayActionRandom;
+		
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_order"]] forState:UIControlStateNormal];
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_order_prs"]] forState:UIControlStateHighlighted];
+		
+		if (self.actionChangeBlock) {
+			self.actionChangeBlock(HJMusicPlayActionRandom);
+		}
+	} else if (button.tag == HJMusicPlayActionRandom) {
+		button.tag = HJMusicPlayActionAllCycle;
+		
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop"]] forState:UIControlStateNormal];
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop_prs"]] forState:UIControlStateHighlighted];
+		
+		if (self.actionChangeBlock) {
+			self.actionChangeBlock(HJMusicPlayActionAllCycle);
+		}
+	}
+	
+}
+/**
+ * 点击播放列表按钮
+ */
+- (void)handlePlayListButtonClick:(UIButton *)button {
+	if (self.actionChangeBlock) {
+		self.actionChangeBlock(HJMusicPlayActionPlayList);
+	}
+}
+/**
+ * 点击上一首按钮
+ */
+- (void)handlePreviewButtonClick:(UIButton *)button {
+	if (self.actionChangeBlock) {
+		self.actionChangeBlock(HJMusicPlayActionPreview);
+	}
+}
+/**
+ * 点击播放、暂停按钮
+ */
+- (void)handlePlayButtonClick:(UIButton *)button {
+	button.selected = !button.isSelected;
+	if (self.actionChangeBlock) {
+		self.actionChangeBlock(button.isSelected ? HJMusicPlayActionPause : HJMusicPlayActionPlay);
+	}
+	if (button.isSelected) {
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause_prs"]] forState:UIControlStateHighlighted];
+	} else {
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play_prs"]] forState:UIControlStateHighlighted];
+	}
+
+}
+/**
+ * 点击下一首按钮
+ */
+- (void)handleNextButtonClick:(UIButton *)button {
+	if (self.actionChangeBlock) {
+		self.actionChangeBlock(HJMusicPlayActionNext);
+	}
 }
 
 /**

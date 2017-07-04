@@ -8,11 +8,36 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * 播放控制操作
+ */
+typedef NS_ENUM(NSUInteger, HJMusicPlayAction) {
+	/** 播放 */
+	HJMusicPlayActionPlay,
+	/** 暂停 */
+	HJMusicPlayActionPause,
+	/** 下一首 */
+	HJMusicPlayActionNext,
+	/** 上一首 */
+	HJMusicPlayActionPreview,
+	/** 随机播放 */
+	HJMusicPlayActionRandom,
+	/** 单曲循环 */
+	HJMusicPlayActionSingleCycle,
+	/** 全部循环 */
+	HJMusicPlayActionAllCycle,
+	/** 播放列表 */
+	HJMusicPlayActionPlayList,
+};
+typedef void(^OnMusicPlayActionChange)(HJMusicPlayAction action);
+
 @interface HJMusicPlayControlView : UIView
 
 /** 当前播放进度 */
 @property (nonatomic, assign) NSInteger currentTime;
 /** 总时长 */
 @property (nonatomic, assign) NSInteger duration;
+/** 播放器动作改版 */
+@property (nonatomic, copy)	OnMusicPlayActionChange actionChangeBlock;
 
 @end
