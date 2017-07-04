@@ -45,6 +45,7 @@
 	return self;
 }
 
+#pragma mark - setter
 - (void)setDuration:(NSInteger)duration {
 	_duration = duration;
 	
@@ -63,6 +64,12 @@
 	self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", min, sec];
     
     [self.slider setValue:currentTime animated:YES];
+}
+
+- (void)setPlaying:(BOOL)playing {
+	_playing = playing;
+	
+	self.playButton.selected = !playing;
 }
 
 /**
@@ -130,14 +137,15 @@
 	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play_prs"]] forState:UIControlStateHighlighted];
 	
 	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause"]] forState:UIControlStateSelected];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause_prs"]] forState:UIControlStateSelected | UIControlStateHighlighted];
 	[playButton addTarget:self action:@selector(handlePlayButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:playButton];
 	self.playButton = playButton;
 	
 	//下一首按钮
 	UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[nextButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_runfm_btn_next"]] forState:UIControlStateNormal];
-	[nextButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_runfm_btn_next_prs"]] forState:UIControlStateHighlighted];
+	[nextButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_next"]] forState:UIControlStateNormal];
+	[nextButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_next_prs"]] forState:UIControlStateHighlighted];
 	[nextButton addTarget:self action:@selector(handleNextButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:nextButton];
 	self.nextButton = nextButton;
@@ -204,12 +212,6 @@
 	if (self.actionChangeBlock) {
 		self.actionChangeBlock(button.isSelected ? HJMusicPlayActionPause : HJMusicPlayActionPlay);
 	}
-	if (button.isSelected) {
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause_prs"]] forState:UIControlStateHighlighted];
-	} else {
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play_prs"]] forState:UIControlStateHighlighted];
-	}
-
 }
 /**
  * 点击下一首按钮

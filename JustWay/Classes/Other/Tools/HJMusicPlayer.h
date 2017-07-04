@@ -12,6 +12,8 @@
 typedef void(^OnPlayProgress)(UInt64 currentTime);
 /** 播放完成 */
 typedef void(^OnPlayEnd)(NSURL *playUrl);
+/** 播放状态改变 */
+typedef void(^OnPlayStatusChanged)(BOOL playing);
 
 @interface HJMusicPlayer : NSObject
 
@@ -27,6 +29,8 @@ typedef void(^OnPlayEnd)(NSURL *playUrl);
 @property (nonatomic, copy) OnPlayProgress playProgressBlock;
 /** 播放完成 */
 @property (nonatomic, copy) OnPlayEnd playEndBlock;
+/** 播放状态改变 */
+@property (nonatomic, copy) OnPlayStatusChanged playStatusChangedBlock;
 
 + (instancetype)sharedInstance;
 /** 开始播放 */

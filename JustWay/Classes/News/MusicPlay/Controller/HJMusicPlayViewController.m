@@ -66,7 +66,7 @@
         return;
     }
     NSFileManager *fm = [NSFileManager defaultManager];
-    BOOL exit = [fm fileExistsAtPath:urlStr];
+//    BOOL exit = [fm fileExistsAtPath:urlStr];
     NSURL *url = nil;
 //    if (exit) {
         url = [NSURL fileURLWithPath:urlStr];
@@ -75,12 +75,22 @@
 //    }
     if (url != nil) {
         [[HJMusicPlayer sharedInstance] playWithUrl:url];
-        [[HJMusicPlayer sharedInstance] addObserver:self forKeyPath:@"currentTime" options:NSKeyValueObservingOptionNew context:nil];
+		
+		NSArray *suffix = [urlStr componentsSeparatedByString:@"."];
+		NSString *lrc = [urlStr stringByReplacingOccurrencesOfString:suffix.lastObject withString:@"lrc"];
+		if ([fm fileExistsAtPath:lrc]) {
+			self.lyricView.lyricUrl = [NSURL fileURLWithPath:lrc];
+		}
         HJWeakSelf;
         //播放进度更新
         [[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
             [weakSelf.controlView setCurrentTime:currentTime];
         }];
+		//播放状态改变
+		[[HJMusicPlayer sharedInstance] setPlayStatusChangedBlock:^(BOOL playing) {
+			weakSelf.controlView.playing = playing;
+			weakSelf.coverView.playing = playing;
+		}];
         //播放完成
         [[HJMusicPlayer sharedInstance] setPlayEndBlock:^(NSURL *playUrl) {
             if ([playUrl.absoluteString hasSuffix:@".mp3"]) {
@@ -133,10 +143,8 @@
                 HJLog(@"耳机相控暂停");
                 if ([HJMusicPlayer sharedInstance].isPlaying) {
                     [[HJMusicPlayer sharedInstance] pause];
-                    [self.coverView setPlaying:NO];
                 } else {
                     [[HJMusicPlayer sharedInstance] resume];
-                    [self.coverView setPlaying:YES];
                 }
                 break;
             }
@@ -158,14 +166,30 @@
     
     //播放器音乐封面
     HJMusicPlayCoverView *coverView = [HJMusicPlayCoverView new];
-    coverView.backgroundColor = HJRANDOM;
     [self.view addSubview:coverView];
     self.coverView = coverView;
     [self.coverView setupCycleAnimation];
 	
 	//播放器控制View
 	HJMusicPlayControlView *controlView = [HJMusicPlayControlView new];
-	controlView.backgroundColor = HJRANDOM;
+	controlView.backgroundColor = [UIColor lightGrayColor];
+	[controlView setActionChangeBlock:^(HJMusicPlayAction playAction) {
+		switch (playAction) {
+			case HJMusicPlayActionPlay: {
+				[[HJMusicPlayer sharedInstance] resume];
+//				weakSelf.coverView.playing = YES;
+				break;
+			}
+			case HJMusicPlayActionPause: {
+				[[HJMusicPlayer sharedInstance] pause];
+//				weakSelf.coverView.playing = NO;
+				break;
+			}
+				
+			default:
+    break;
+		}
+	}];
 	[self.view addSubview:controlView];
 	self.controlView = controlView;
 	

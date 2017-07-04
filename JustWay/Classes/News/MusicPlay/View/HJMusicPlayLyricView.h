@@ -10,4 +10,9 @@
 
 @interface HJMusicPlayLyricView : UIView
 
+/** 播放状态(YES : 正在播放 NO : 暂停) */
+@property (nonatomic, assign) BOOL playing;
+/** 歌词文件 */
+@property (nonatomic, strong) NSURL *lyricUrl;
+
 @end

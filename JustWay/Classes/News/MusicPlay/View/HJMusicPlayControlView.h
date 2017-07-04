@@ -39,5 +39,7 @@ typedef void(^OnMusicPlayActionChange)(HJMusicPlayAction action);
 @property (nonatomic, assign) NSInteger duration;
 /** 播放器动作改版 */
 @property (nonatomic, copy)	OnMusicPlayActionChange actionChangeBlock;
+/** 播放状态(YES : 正在播放 NO : 暂停) */
+@property (nonatomic, assign) BOOL playing;
 
 @end

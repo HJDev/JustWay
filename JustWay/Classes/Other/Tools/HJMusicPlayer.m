@@ -44,7 +44,6 @@
 	if (self.player.currentItem) {
 		[self clearObserver];
 	}
-	
 	AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
 	[item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
 	[item addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
@@ -54,6 +53,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playInterrupt) name:AVPlayerItemPlaybackStalledNotification object:nil];
 	
 	self.player = [AVPlayer playerWithPlayerItem:item];
+	[self.player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:nil];
 	
 	HJWeakSelf;
 	[self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
@@ -109,6 +109,7 @@
 		[self.player.currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
 		[self.player.currentItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
 		[self.player removeTimeObserver:self.timeObserver];
+		[self.player removeObserver:self forKeyPath:@"rate" context:nil];
 		
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
@@ -201,6 +202,19 @@
 		//缓冲总长度
 		NSTimeInterval totalBuffer = startSeconds + durationSeconds;
 		HJLog(@"共缓冲：%.2f  ,   %.2f    ,  %.2f",totalBuffer, startSeconds, durationSeconds);
+	} else if ([keyPath isEqualToString:@"rate"]) {
+		CGFloat rate = [change[NSKeyValueChangeNewKey] integerValue];
+		if (rate == 1.0) {
+			self.playing = YES;
+			if (self.playStatusChangedBlock) {
+				self.playStatusChangedBlock(YES);
+			}
+		} else {
+			self.playing = NO;
+			if (self.playStatusChangedBlock) {
+				self.playStatusChangedBlock(NO);
+			}
+		}
 	}
 }
 
