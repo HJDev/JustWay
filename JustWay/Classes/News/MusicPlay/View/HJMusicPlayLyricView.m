@@ -29,10 +29,27 @@
 	if (lyricStr.length == 0) {
 		return nil;
 	}
+    
 	NSArray *lyricArray = [lyricStr componentsSeparatedByString:@"\n"];
 	for (NSString *lrc in lyricArray) {
-		NSArray *lrcArray = [lrc componentsSeparatedByString:@"]"];
-		HJLog(@"%@", lrcArray);
+        if (lrc.length == 0) {
+            continue;
+        }
+        NSString *regexStr = @"\\[\\d{2}:\\d{2}\\.\\d{2}\\].+";
+        regexStr = @"\\[[a-zA-Z0-9]+:[a-zA-Z0-9_:.]+\\]";
+        NSError *error = nil;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionAnchorsMatchLines error:&error];
+        NSArray<NSTextCheckingResult *> *results = [regex matchesInString:lrc options:NSMatchingReportCompletion range:[lrc rangeOfString:lrc]];
+        
+        NSMutableString *currentLyric = [NSMutableString string];
+        for (NSTextCheckingResult *result in results) {
+//            HJLog(@"%@", result);
+            [currentLyric appendString:[lrc substringWithRange:result.range]];
+            [currentLyric appendString:@"_nnn_"];
+        }
+        HJLog(@"currentLyric : %@", currentLyric);
+//		NSArray *lrcArray = [lrc componentsSeparatedByString:@"]"];
+//		HJLog(@"%@", lrcArray);
 	}
 	
 	return nil;
