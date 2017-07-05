@@ -7,52 +7,116 @@
 //
 
 #import "HJMusicPlayLyricView.h"
+#import "HJMusicPlayLyricModel.h"
+#import "HJMusicLyricTool.h"
+#import "HJMusicLyricTableViewCell.h"
+#import <Masonry.h>
+
+@interface HJMusicPlayLyricView()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, weak)	  UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray<HJMusicPlayLyricModel *> *dataList;
+@property (nonatomic, assign) NSInteger currentLyricIndex;
+
+@end
 
 @implementation HJMusicPlayLyricView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+	if (self = [super initWithFrame:frame]) {
+		[self setupViews];
+	}
+	return self;
+}
+
+#pragma mark - init
+- (void)setupViews {
+	UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+	tableView.delegate = self;
+	tableView.dataSource = self;
+	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	[self addSubview:tableView];
+	self.tableView = tableView;
+	
+	HJWeakSelf;
+	CGFloat tableViewMarginTop = 0;
+	[self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+		make.left.right.mas_equalTo(weakSelf);
+		make.top.mas_equalTo(weakSelf).offset(tableViewMarginTop);
+		make.bottom.mas_equalTo(weakSelf).offset(-tableViewMarginTop);
+	}];
+}
 
 #pragma mark - setter
 - (void)setPlaying:(BOOL)playing {
 	_playing = playing;
 }
 
+- (void)setCurrentTime:(CGFloat)currentTime {
+	_currentTime = currentTime;
+	
+	NSInteger i = 0;
+	for (HJMusicPlayLyricModel *model in self.dataList) {
+		NSInteger nextIndex = i;
+		if (i + 1 < self.dataList.count) {
+			nextIndex = i + 1;
+		}
+		HJMusicPlayLyricModel *nextModel = [self.dataList objectAtIndex:nextIndex];
+		if (model.time <= currentTime && nextModel.time > currentTime) {
+			if (i == self.currentLyricIndex) {
+				return;
+			}
+			NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:self.currentLyricIndex inSection:0];
+			HJMusicPlayLyricModel *lastModel = [self.dataList objectAtIndex:self.currentLyricIndex];
+			lastModel.current = NO;
+			HJMusicPlayLyricModel *currentModel = [self.dataList objectAtIndex:i];
+			currentModel.current = YES;
+			self.currentLyricIndex = i;
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+			[self.tableView reloadRowsAtIndexPaths:@[lastIndexPath, indexPath] withRowAnimation:UITableViewRowAnimationNone];
+			[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+		}
+		i++;
+	}
+}
+
 - (void)setLyricUrl:(NSURL *)lyricUrl {
 	_lyricUrl = lyricUrl;
 	
-	[self parseLyric:lyricUrl];
+	self.currentLyricIndex = 0;
+	self.dataList = [[HJMusicLyricTool alloc] parseLyric:lyricUrl];
+	[self.tableView reloadData];
 }
 
-#pragma mark - 歌词解析
-- (NSDictionary *)parseLyric:(NSURL *)lyricUrl {
-	NSString *lyricStr = [NSString stringWithContentsOfURL:lyricUrl encoding:NSUTF8StringEncoding error:nil];
-	HJLog(@"lyric : %@", lyricStr);
-	
-	if (lyricStr.length == 0) {
-		return nil;
+#pragma mark - UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return self.dataList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	HJMusicLyricTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HJMusicLyricTableViewCell class])];
+	if (cell == nil) {
+		cell = [[HJMusicLyricTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([HJMusicLyricTableViewCell class])];
 	}
-    
-	NSArray *lyricArray = [lyricStr componentsSeparatedByString:@"\n"];
-	for (NSString *lrc in lyricArray) {
-        if (lrc.length == 0) {
-            continue;
-        }
-        NSString *regexStr = @"\\[\\d{2}:\\d{2}\\.\\d{2}\\].+";
-        regexStr = @"\\[[a-zA-Z0-9]+:[a-zA-Z0-9_:.]+\\]";
-        NSError *error = nil;
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionAnchorsMatchLines error:&error];
-        NSArray<NSTextCheckingResult *> *results = [regex matchesInString:lrc options:NSMatchingReportCompletion range:[lrc rangeOfString:lrc]];
-        
-        NSMutableString *currentLyric = [NSMutableString string];
-        for (NSTextCheckingResult *result in results) {
-//            HJLog(@"%@", result);
-            [currentLyric appendString:[lrc substringWithRange:result.range]];
-            [currentLyric appendString:@"_nnn_"];
-        }
-        HJLog(@"currentLyric : %@", currentLyric);
-//		NSArray *lrcArray = [lrc componentsSeparatedByString:@"]"];
-//		HJLog(@"%@", lrcArray);
+	if (indexPath.row >= self.dataList.count) {
+		return cell;
 	}
-	
-	return nil;
+	HJMusicPlayLyricModel *model = [self.dataList objectAtIndex:indexPath.row];
+	cell.model = model;
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	HJLog(@"===");
+}
+
+#pragma mark - lazyload
+- (NSMutableArray<HJMusicPlayLyricModel *> *)dataList {
+	if (_dataList == nil) {
+		_dataList = [NSMutableArray<HJMusicPlayLyricModel *> new];
+	}
+	return _dataList;
 }
 
 @end

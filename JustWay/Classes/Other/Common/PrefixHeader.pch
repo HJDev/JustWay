@@ -13,6 +13,7 @@
 #define HJRGBA(r, g, b, a) [UIColor colorWithRed:((r) / 255.0) green:((g) / 255.0) blue:((b) / 255.0) alpha:(a)]
 #define HJRGB(r, g, b)	   HJRGBA(r, g, b, 1.0)
 #define HJRANDOM		   HJRGB(arc4random() % 255, arc4random() % 255, arc4random() % 255)
+#define HJBaseColor		   HJRGB(211, 57, 49)
 
 /** LOG */
 #ifdef DEBUG
@@ -41,5 +42,11 @@
 #define iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 //是否是iPhone6+
 #define iPhone6PLUS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/** APP 尺寸 */
+#define HJStatusBarHeight 20
+#define HJNavigationBarHeight 44
+#define HJNavigationStatusHeight 64
+#define HJTabbarHeight 49
 
 #endif /* PrefixHeader_pch */

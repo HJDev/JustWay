@@ -49,6 +49,9 @@
 		795A0E4D1F04E7B800F02FB4 /* HJNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */; };
 		795DB7B11F068D9C00172BD4 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 795DB7B01F068D9C00172BD4 /* image.png */; };
 		79BC85641F0B342A0050F353 /* NewsListIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 79BC85631F0B342A0050F353 /* NewsListIcons.bundle */; };
+		79BC85681F0C83DB0050F353 /* HJMusicPlayLyricModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85671F0C83DB0050F353 /* HJMusicPlayLyricModel.m */; };
+		79BC856C1F0C9B490050F353 /* HJMusicLyricTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC856B1F0C9B490050F353 /* HJMusicLyricTool.m */; };
+		79BC856F1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC856E1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m */; };
 		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
 		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
 /* End PBXBuildFile section */
@@ -143,6 +146,12 @@
 		795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNewsModel.m; sourceTree = "<group>"; };
 		795DB7B01F068D9C00172BD4 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		79BC85631F0B342A0050F353 /* NewsListIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NewsListIcons.bundle; sourceTree = "<group>"; };
+		79BC85661F0C83DB0050F353 /* HJMusicPlayLyricModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayLyricModel.h; sourceTree = "<group>"; };
+		79BC85671F0C83DB0050F353 /* HJMusicPlayLyricModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayLyricModel.m; sourceTree = "<group>"; };
+		79BC856A1F0C9B490050F353 /* HJMusicLyricTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicLyricTool.h; sourceTree = "<group>"; };
+		79BC856B1F0C9B490050F353 /* HJMusicLyricTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicLyricTool.m; sourceTree = "<group>"; };
+		79BC856D1F0CB2B70050F353 /* HJMusicLyricTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicLyricTableViewCell.h; sourceTree = "<group>"; };
+		79BC856E1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicLyricTableViewCell.m; sourceTree = "<group>"; };
 		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
 		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +205,8 @@
 				790D33151F06443E00491A7B /* HJMusicPlayLyricView.m */,
 				790D33171F06445800491A7B /* HJMusicPlayCoverView.h */,
 				790D33181F06445800491A7B /* HJMusicPlayCoverView.m */,
+				79BC856D1F0CB2B70050F353 /* HJMusicLyricTableViewCell.h */,
+				79BC856E1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +493,8 @@
 		795A0E351F03B80900F02FB4 /* MusicPlay */ = {
 			isa = PBXGroup;
 			children = (
+				79BC85691F0C9B240050F353 /* Tool */,
+				79BC85651F0C83A50050F353 /* Model */,
 				790D33101F0643DB00491A7B /* View */,
 				795A0E361F03B82900F02FB4 /* Controller */,
 			);
@@ -514,6 +527,24 @@
 				795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		79BC85651F0C83A50050F353 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79BC85661F0C83DB0050F353 /* HJMusicPlayLyricModel.h */,
+				79BC85671F0C83DB0050F353 /* HJMusicPlayLyricModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		79BC85691F0C9B240050F353 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				79BC856A1F0C9B490050F353 /* HJMusicLyricTool.h */,
+				79BC856B1F0C9B490050F353 /* HJMusicLyricTool.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		DAE8F1F147C12E71EB53D7DE /* Frameworks */ = {
@@ -844,6 +875,8 @@
 				795A0CFB1F02336F00F02FB4 /* main.m in Sources */,
 				795A0DF51F03532400F02FB4 /* UIImage+HJ.m in Sources */,
 				790D33131F06440200491A7B /* HJMusicPlayControlView.m in Sources */,
+				79BC856C1F0C9B490050F353 /* HJMusicLyricTool.m in Sources */,
+				79BC856F1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m in Sources */,
 				795A0DCD1F03428400F02FB4 /* HJFilesViewController.m in Sources */,
 				795A0DD01F03428E00F02FB4 /* HJMeViewController.m in Sources */,
 				795A0E091F037F5F00F02FB4 /* HJUploaderServer.m in Sources */,
@@ -851,6 +884,7 @@
 				795A0E3C1F04DC5600F02FB4 /* HJBaseViewController.m in Sources */,
 				795A0E391F03B84B00F02FB4 /* HJMusicPlayViewController.m in Sources */,
 				795A0DCA1F0341D200F02FB4 /* HJNewsViewController.m in Sources */,
+				79BC85681F0C83DB0050F353 /* HJMusicPlayLyricModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

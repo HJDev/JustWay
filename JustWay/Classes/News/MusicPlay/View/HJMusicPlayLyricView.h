@@ -12,6 +12,8 @@
 
 /** 播放状态(YES : 正在播放 NO : 暂停) */
 @property (nonatomic, assign) BOOL playing;
+/** 当前时间 */
+@property (nonatomic, assign) CGFloat currentTime;
 /** 歌词文件 */
 @property (nonatomic, strong) NSURL *lyricUrl;
 

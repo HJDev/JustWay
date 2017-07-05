@@ -19,6 +19,7 @@
     [super viewDidLoad];
 	
 	self.navigationController.delegate = self;
+	self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)didReceiveMemoryWarning {

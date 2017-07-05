@@ -97,7 +97,7 @@
 	//播放进度滑竿
 	UISlider *slider = [UISlider new];
 	[slider setThumbImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_playbar_btn"]] forState:UIControlStateNormal];
-	[slider setMinimumTrackTintColor:HJRGB(211, 57, 49)];
+	[slider setMinimumTrackTintColor:HJBaseColor];
 	[slider setMaximumTrackTintColor:HJRGB(116, 151, 173)];
 	[self addSubview:slider];
 	self.slider = slider;
@@ -133,11 +133,11 @@
 	
 	//播放按钮
 	UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play"]] forState:UIControlStateNormal];
-	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play_prs"]] forState:UIControlStateHighlighted];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play"]] forState:UIControlStateSelected];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_play_prs"]] forState:UIControlStateSelected | UIControlStateHighlighted];
 	
-	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause"]] forState:UIControlStateSelected];
-	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause_prs"]] forState:UIControlStateSelected | UIControlStateHighlighted];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause"]] forState:UIControlStateNormal];
+	[playButton setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_btn_pause_prs"]] forState:UIControlStateHighlighted];
 	[playButton addTarget:self action:@selector(handlePlayButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 	[self.playBottomView addSubview:playButton];
 	self.playButton = playButton;

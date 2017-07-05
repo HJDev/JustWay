@@ -8,7 +8,6 @@
 
 #import "HJMusicPlayer.h"
 #import <AVFoundation/AVFoundation.h>
-#import "HJWeakTimer.h"
 
 @interface HJMusicPlayer()
 
@@ -16,6 +15,7 @@
 @property (nonatomic, strong) AVPlayer *player;
 /** 播放器定时器 */
 @property (nonatomic, strong) id timeObserver;
+@property (nonatomic, assign) NSInteger observerCount;
 
 @end
 
@@ -26,6 +26,7 @@
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		instance = [HJMusicPlayer new];
+		instance.observerCount = 0;
 	});
 	return instance;
 }
@@ -33,7 +34,7 @@
 #pragma mark - 播放音频
 /** 开始播放 */
 - (void)playWithUrl:(NSURL *)url {
-	if ([url.absoluteString isEqualToString:self.playUrl.absoluteString]) {
+	if ([url.absoluteString isEqualToString:self.playUrl.absoluteString] && self.player) {
 		return;
 	}
 	_playUrl = url;
@@ -54,6 +55,7 @@
 	
 	self.player = [AVPlayer playerWithPlayerItem:item];
 	[self.player addObserver:self forKeyPath:@"rate" options:NSKeyValueObservingOptionNew context:nil];
+	self.observerCount++;
 	
 	HJWeakSelf;
 	[self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
@@ -78,6 +80,8 @@
 - (void)resume {
 	if (self.player) {
 		[self.player play];
+	} else {
+		[self playWithUrl:self.playUrl];
 	}
 }
 /** 暂停播放 */
@@ -85,6 +89,14 @@
 	if (self.player) {
 		[self.player pause];
 	}
+}
+/** seek */
+- (void)seek:(NSInteger)seekTime {
+	if (self.duration == 0) {
+		return;
+	}
+	CMTime time = CMTimeMake(seekTime * self.duration, self.duration);
+	[self.player seekToTime:time toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 /** 静音 */
 - (void)setMuted:(BOOL)muted {
@@ -98,26 +110,38 @@
 - (BOOL)isPlaying {
     return self.player.rate == 1.0;
 }
+- (BOOL)isEnd {
+	if (self.player == nil) {
+		return YES;
+	}
+	return NO;
+}
 
 #pragma mark - func player
 /**
  * 清除播放器观察者及通知
  */
 - (void)clearObserver {
-	@try {
-		[self.player.currentItem removeObserver:self forKeyPath:@"status" context:nil];
-		[self.player.currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
-		[self.player.currentItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
-		[self.player removeTimeObserver:self.timeObserver];
-		[self.player removeObserver:self forKeyPath:@"rate" context:nil];
-		
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
-	} @catch (NSException *exception) {
-		HJLog(@"多次删除observer");
-	} @finally {
-		HJLog(@"多次删除observer");
+	@synchronized (self) {
+		if (self.observerCount > 0) {
+//			@try {
+				[self.player.currentItem removeObserver:self forKeyPath:@"status" context:nil];
+				[self.player.currentItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
+				[self.player.currentItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
+				[self.player removeTimeObserver:self.timeObserver];
+				[self.player removeObserver:self forKeyPath:@"rate" context:nil];
+				
+				[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+				[[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
+//			} @catch (NSException *exception) {
+//				HJLog(@"多次删除observer");
+//			} @finally {
+//				HJLog(@"多次删除observer");
+//			}
+			self.observerCount--;
+		}
 	}
+	
 }
 
 /**
@@ -127,9 +151,7 @@
 	HJLog(@"播放完成");
 	
 	if (self.player) {
-        if (self.playEndBlock) {
-            self.playEndBlock(self.playUrl);
-        }
+		
 		[self.player pause];
 		
 		[self.player.currentItem cancelPendingSeeks];
@@ -141,9 +163,13 @@
 		
 		self.player = nil;
 		
+		if (self.playEndBlock) {
+			self.playEndBlock(self.playUrl);
+		}
+		
 	}
 	
-	_playUrl = nil;
+//	_playUrl = nil;
 }
 
 /**
@@ -165,7 +191,7 @@
 				break;
 			}
 			case AVPlayerItemStatusReadyToPlay: {
-				//HJLog(@"资源准备好了, 已经可以播放");
+				HJLog(@"资源准备好了, 已经可以播放");
 				[self resume];
 				break;
 			}

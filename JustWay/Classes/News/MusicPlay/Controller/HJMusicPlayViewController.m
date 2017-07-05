@@ -74,17 +74,27 @@
 //        url = [NSURL URLWithString:urlStr];
 //    }
     if (url != nil) {
+		NSArray *fileNames = [urlStr componentsSeparatedByString:@"/"];
+		self.title = fileNames[fileNames.count - 1];
         [[HJMusicPlayer sharedInstance] playWithUrl:url];
 		
 		NSArray *suffix = [urlStr componentsSeparatedByString:@"."];
 		NSString *lrc = [urlStr stringByReplacingOccurrencesOfString:suffix.lastObject withString:@"lrc"];
 		if ([fm fileExistsAtPath:lrc]) {
+//			if ([urlStr hasSuffix:@"S.H.E - 美丽新世界.m4a"]) {
+//				self.lyricView.lyricUrl = [NSURL URLWithString:@"http://image.cdn.teamleader.cn/S.H.E%20-%20%E7%BE%8E%E4%B8%BD%E6%96%B0%E4%B8%96%E7%95%8C.lrc"];
+//			} else {
+//				self.lyricView.lyricUrl = [NSURL URLWithString:@"http://image.cdn.teamleader.cn/%E5%91%A8%E5%8D%8E%E5%81%A5%20-%20%E9%A3%8E%E9%9B%A8%E6%97%A0%E9%98%BB.lrc"];
+//			}
 			self.lyricView.lyricUrl = [NSURL fileURLWithPath:lrc];
+		} else {
+			self.lyricView.lyricUrl = nil;
 		}
         HJWeakSelf;
         //播放进度更新
         [[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
             [weakSelf.controlView setCurrentTime:currentTime];
+			weakSelf.lyricView.currentTime = currentTime;
         }];
 		//播放状态改变
 		[[HJMusicPlayer sharedInstance] setPlayStatusChangedBlock:^(BOOL playing) {
@@ -92,20 +102,27 @@
 			weakSelf.coverView.playing = playing;
 		}];
         //播放完成
+		NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
         [[HJMusicPlayer sharedInstance] setPlayEndBlock:^(NSURL *playUrl) {
             if ([playUrl.absoluteString hasSuffix:@".mp3"]) {
-//                NSURL *url = [NSURL fileURLWithPath:@"/var/mobile/Containers/Data/Application/59CC5090-6487-49F4-8745-7AA5640DAD83/Documents/she - 美丽新世界.m4a"];
-//                [[HJMusicPlayer sharedInstance] playWithUrl:url];
-                [weakSelf startPlayWithUrl:@"/var/mobile/Containers/Data/Application/59CC5090-6487-49F4-8745-7AA5640DAD83/Documents/she - 美丽新世界.m4a"];
+				weakSelf.playUrl = [dir stringByAppendingPathComponent:@"S.H.E - 美丽新世界.m4a"];
+				[weakSelf startPlayWithUrl:weakSelf.playUrl];
             } else {
 //                NSURL *url = [NSURL URLWithString:@"http://122.228.254.11/mp32.9ku.com/upload/2015/11/16/667848.mp3"];
 //                [[HJMusicPlayer sharedInstance] playWithUrl:url];
-//                [weakSelf startPlayWithUrl:@"http://122.228.254.11/mp32.9ku.com/upload/2015/11/16/667848.mp3"];
-                [weakSelf startPlayWithUrl:@"/var/mobile/Containers/Data/Application/BE808683-1DAA-4BA6-8868-7CDE5BC853AC/Documents/大王叫我来巡山.mp3"];
+				[weakSelf startPlayWithUrl:[dir stringByAppendingPathComponent:@"周华健 - 风雨无阻.mp3"]];
             }
         }];
         [self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
+//		[[HJMusicPlayer sharedInstance] seek:200];
     }
+}
+
+/**
+ * 下一曲
+ */
+- (void)playNext {
+	
 }
 
 #pragma mark - 接受远程控制事件
@@ -133,6 +150,9 @@
             }
             case UIEventSubtypeRemoteControlNextTrack: {
                 HJLog(@"下一首");
+				NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+				self.playUrl = [dir stringByAppendingPathComponent:@"S.H.E - 美丽新世界.m4a"];
+				[self startPlayWithUrl:self.playUrl];
                 break;
             }
             case UIEventSubtypeRemoteControlPreviousTrack: {
@@ -169,6 +189,7 @@
     [self.view addSubview:coverView];
     self.coverView = coverView;
     [self.coverView setupCycleAnimation];
+	self.coverView.hidden = YES;
 	
 	//播放器控制View
 	HJMusicPlayControlView *controlView = [HJMusicPlayControlView new];
@@ -187,7 +208,7 @@
 			}
 				
 			default:
-    break;
+				break;
 		}
 	}];
 	[self.view addSubview:controlView];

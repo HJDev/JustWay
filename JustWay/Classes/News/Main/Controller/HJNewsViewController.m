@@ -85,7 +85,7 @@
 	self.navigationItem.rightBarButtonItem = rightButton;
 	
 	self.edgesForExtendedLayout = UIRectEdgeTop;
-	UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.rdv_tabBarController.tabBar.frame.size.height) style:UITableViewStylePlain];
+	UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HJNavigationStatusHeight, self.view.frame.size.width, self.view.frame.size.height - HJTabbarHeight - HJNavigationStatusHeight) style:UITableViewStylePlain];
 	tableView.delegate = self;
 	tableView.dataSource = self;
 	tableView.rowHeight = 55.0f;

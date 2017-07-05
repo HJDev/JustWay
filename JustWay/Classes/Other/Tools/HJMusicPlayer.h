@@ -23,6 +23,8 @@ typedef void(^OnPlayStatusChanged)(BOOL playing);
 @property (nonatomic, assign, getter=isMuted) BOOL muted;
 /** 是否正在播放 */
 @property (nonatomic, assign, getter=isPlaying) BOOL playing;
+/** 是否已经播放完成 */
+@property (nonatomic, assign, getter=isEnd) BOOL end;
 /** 音频总时长 */
 @property (nonatomic, assign, readonly) Float64 duration;
 /** 当前播放进度 */
@@ -41,5 +43,7 @@ typedef void(^OnPlayStatusChanged)(BOOL playing);
 - (void)resume;
 /** 暂停播放 */
 - (void)pause;
+/** seek */
+- (void)seek:(NSInteger)seekTime;
 
 @end

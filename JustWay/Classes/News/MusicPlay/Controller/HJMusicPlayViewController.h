@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJBaseViewController.h"
 
-@interface HJMusicPlayViewController : UIViewController
+@interface HJMusicPlayViewController : HJBaseViewController
 
 /** 音乐播放地址 */
 @property (nonatomic, copy) NSString *playUrl;
+/** 音乐列表 */
+@property (nonatomic, strong) NSMutableArray *musicList;
 
 @end
