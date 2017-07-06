@@ -10,6 +10,7 @@
 #import "HJUploaderServer.h"
 #import "HJNewsModel.h"
 #import "HJNewsTableViewCell.h"
+#import "HJMusicPlayModel.h"
 
 #import "HJMusicPlayViewController.h"
 
@@ -149,8 +150,34 @@
 	HJNewsModel *model = self.dataList[indexPath.row];
 	
 	if ([model.fileName hasSuffix:@".mp3"] || [model.fileName hasSuffix:@".m4a"]) {
+		//获取所有音乐文件
+		NSMutableArray *musicList = [NSMutableArray array];
+		for (HJNewsModel *model in self.dataList) {
+			if ([model.fileName hasSuffix:@".mp3"] || [model.fileName hasSuffix:@".m4a"]) {
+				NSString *musicPath = [self.fileDir stringByAppendingPathComponent:model.fileName];
+				NSArray *suffix = [musicPath componentsSeparatedByString:@"."];
+				NSString *lyricPath = [musicPath stringByReplacingOccurrencesOfString:suffix.lastObject withString:@"lrc"];
+				NSFileManager *fm = [NSFileManager defaultManager];
+				
+				HJMusicPlayModel *playModel = [HJMusicPlayModel new];
+				playModel.playUrl = [NSURL fileURLWithPath:musicPath];
+				playModel.lyricUrl = [fm fileExistsAtPath:lyricPath] ? [NSURL fileURLWithPath:lyricPath] : nil;
+				[musicList addObject:playModel];
+			}
+		}
+		
+		NSString *musicPath = [self.fileDir stringByAppendingPathComponent:model.fileName];
+		NSArray *suffix = [musicPath componentsSeparatedByString:@"."];
+		NSString *lyricPath = [musicPath stringByReplacingOccurrencesOfString:suffix.lastObject withString:@"lrc"];
+		NSFileManager *fm = [NSFileManager defaultManager];
+		
+		HJMusicPlayModel *playModel = [HJMusicPlayModel new];
+		playModel.playUrl = [NSURL fileURLWithPath:musicPath];
+		playModel.lyricUrl = [fm fileExistsAtPath:lyricPath] ? [NSURL fileURLWithPath:lyricPath] : nil;
+		
 		HJMusicPlayViewController *mpVc = [HJMusicPlayViewController new];
-		mpVc.playUrl = [self.fileDir stringByAppendingPathComponent:model.fileName];
+		mpVc.playModel = playModel;
+		mpVc.musicList = [musicList mutableCopy];
 		mpVc.title = model.fileName;
 		[self.navigationController pushViewController:mpVc animated:YES];
 	}

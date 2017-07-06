@@ -52,6 +52,9 @@
 		79BC85681F0C83DB0050F353 /* HJMusicPlayLyricModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85671F0C83DB0050F353 /* HJMusicPlayLyricModel.m */; };
 		79BC856C1F0C9B490050F353 /* HJMusicLyricTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC856B1F0C9B490050F353 /* HJMusicLyricTool.m */; };
 		79BC856F1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC856E1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m */; };
+		79BC85721F0DD6A50050F353 /* HJMusicPlayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85711F0DD6A50050F353 /* HJMusicPlayModel.m */; };
+		79BC85751F0DF6D00050F353 /* NSString+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85741F0DF6D00050F353 /* NSString+HJ.m */; };
+		79BC85781F0E02F00050F353 /* HJCommonBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85771F0E02F00050F353 /* HJCommonBaseViewController.m */; };
 		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
 		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
 /* End PBXBuildFile section */
@@ -152,6 +155,12 @@
 		79BC856B1F0C9B490050F353 /* HJMusicLyricTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicLyricTool.m; sourceTree = "<group>"; };
 		79BC856D1F0CB2B70050F353 /* HJMusicLyricTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicLyricTableViewCell.h; sourceTree = "<group>"; };
 		79BC856E1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicLyricTableViewCell.m; sourceTree = "<group>"; };
+		79BC85701F0DD6A50050F353 /* HJMusicPlayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayModel.h; sourceTree = "<group>"; };
+		79BC85711F0DD6A50050F353 /* HJMusicPlayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayModel.m; sourceTree = "<group>"; };
+		79BC85731F0DF6D00050F353 /* NSString+HJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HJ.h"; sourceTree = "<group>"; };
+		79BC85741F0DF6D00050F353 /* NSString+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HJ.m"; sourceTree = "<group>"; };
+		79BC85761F0E02F00050F353 /* HJCommonBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCommonBaseViewController.h; sourceTree = "<group>"; };
+		79BC85771F0E02F00050F353 /* HJCommonBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCommonBaseViewController.m; sourceTree = "<group>"; };
 		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
 		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -402,6 +411,8 @@
 				795A0DEF1F034D5C00F02FB4 /* HJNavigationController.m */,
 				795A0E3A1F04DC5600F02FB4 /* HJBaseViewController.h */,
 				795A0E3B1F04DC5600F02FB4 /* HJBaseViewController.m */,
+				79BC85761F0E02F00050F353 /* HJCommonBaseViewController.h */,
+				79BC85771F0E02F00050F353 /* HJCommonBaseViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -423,6 +434,8 @@
 				795A0DF41F03532400F02FB4 /* UIImage+HJ.m */,
 				790D330D1F050FE600491A7B /* NSDate+HJ.h */,
 				790D330E1F050FE600491A7B /* NSDate+HJ.m */,
+				79BC85731F0DF6D00050F353 /* NSString+HJ.h */,
+				79BC85741F0DF6D00050F353 /* NSString+HJ.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -534,6 +547,8 @@
 			children = (
 				79BC85661F0C83DB0050F353 /* HJMusicPlayLyricModel.h */,
 				79BC85671F0C83DB0050F353 /* HJMusicPlayLyricModel.m */,
+				79BC85701F0DD6A50050F353 /* HJMusicPlayModel.h */,
+				79BC85711F0DD6A50050F353 /* HJMusicPlayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -861,10 +876,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79BC85781F0E02F00050F353 /* HJCommonBaseViewController.m in Sources */,
 				795A0E0F1F03803500F02FB4 /* GCDWebUploader.m in Sources */,
+				79BC85721F0DD6A50050F353 /* HJMusicPlayModel.m in Sources */,
 				795A0E2B1F038BF200F02FB4 /* HJConfig.m in Sources */,
 				790D330F1F050FE600491A7B /* NSDate+HJ.m in Sources */,
 				795A0E311F03B43200F02FB4 /* HJMusicPlayer.m in Sources */,
+				79BC85751F0DF6D00050F353 /* NSString+HJ.m in Sources */,
 				795A0E2E1F0391E600F02FB4 /* HJTools.m in Sources */,
 				795A0DF01F034D5C00F02FB4 /* HJNavigationController.m in Sources */,
 				795A0E341F03B64000F02FB4 /* HJWeakTimer.m in Sources */,

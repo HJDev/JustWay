@@ -11,6 +11,7 @@
 #import "HJMusicPlayLyricView.h"
 #import "HJMusicPlayCoverView.h"
 #import "HJMusicPlayer.h"
+#import "HJMusicPlayModel.h"
 #import <Masonry.h>
 
 
@@ -32,7 +33,7 @@
 	self.view.backgroundColor = [UIColor whiteColor];
 	
 	[self setupViews];
-    [self startPlayWithUrl:self.playUrl];
+    [self startPlayWithModel:self.playModel];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,35 +62,16 @@
 /**
  * 开始播放
  */
-- (void)startPlayWithUrl:(NSString *)urlStr {
-    if (urlStr.length == 0) {
+- (void)startPlayWithModel:(HJMusicPlayModel *)playModel {
+    if (playModel.playUrl == nil) {
         return;
     }
-    NSFileManager *fm = [NSFileManager defaultManager];
-//    BOOL exit = [fm fileExistsAtPath:urlStr];
-    NSURL *url = nil;
-//    if (exit) {
-        url = [NSURL fileURLWithPath:urlStr];
-//    } else {
-//        url = [NSURL URLWithString:urlStr];
-//    }
-    if (url != nil) {
-		NSArray *fileNames = [urlStr componentsSeparatedByString:@"/"];
-		self.title = fileNames[fileNames.count - 1];
-        [[HJMusicPlayer sharedInstance] playWithUrl:url];
-		
-		NSArray *suffix = [urlStr componentsSeparatedByString:@"."];
-		NSString *lrc = [urlStr stringByReplacingOccurrencesOfString:suffix.lastObject withString:@"lrc"];
-		if ([fm fileExistsAtPath:lrc]) {
-//			if ([urlStr hasSuffix:@"S.H.E - 美丽新世界.m4a"]) {
-//				self.lyricView.lyricUrl = [NSURL URLWithString:@"http://image.cdn.teamleader.cn/S.H.E%20-%20%E7%BE%8E%E4%B8%BD%E6%96%B0%E4%B8%96%E7%95%8C.lrc"];
-//			} else {
-//				self.lyricView.lyricUrl = [NSURL URLWithString:@"http://image.cdn.teamleader.cn/%E5%91%A8%E5%8D%8E%E5%81%A5%20-%20%E9%A3%8E%E9%9B%A8%E6%97%A0%E9%98%BB.lrc"];
-//			}
-			self.lyricView.lyricUrl = [NSURL fileURLWithPath:lrc];
-		} else {
-			self.lyricView.lyricUrl = nil;
-		}
+	NSString *playUrlStr = [NSString URLDecodedString:playModel.playUrl.absoluteString];
+	NSArray *musicPartial = [playUrlStr componentsSeparatedByString:@"/"];
+	self.title = musicPartial.lastObject;
+    if (playModel.playUrl != nil) {
+        [[HJMusicPlayer sharedInstance] playWithUrl:playModel.playUrl];
+		self.lyricView.lyricUrl = playModel.lyricUrl;
         HJWeakSelf;
         //播放进度更新
         [[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
@@ -102,16 +84,8 @@
 			weakSelf.coverView.playing = playing;
 		}];
         //播放完成
-		NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
         [[HJMusicPlayer sharedInstance] setPlayEndBlock:^(NSURL *playUrl) {
-            if ([playUrl.absoluteString hasSuffix:@".mp3"]) {
-				weakSelf.playUrl = [dir stringByAppendingPathComponent:@"S.H.E - 美丽新世界.m4a"];
-				[weakSelf startPlayWithUrl:weakSelf.playUrl];
-            } else {
-//                NSURL *url = [NSURL URLWithString:@"http://122.228.254.11/mp32.9ku.com/upload/2015/11/16/667848.mp3"];
-//                [[HJMusicPlayer sharedInstance] playWithUrl:url];
-				[weakSelf startPlayWithUrl:[dir stringByAppendingPathComponent:@"周华健 - 风雨无阻.mp3"]];
-            }
+			[weakSelf playNextWithCurrentMusic:weakSelf.playModel playMode:HJMusicPlayActionAllCycle];
         }];
         [self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
 //		[[HJMusicPlayer sharedInstance] seek:200];
@@ -121,7 +95,16 @@
 /**
  * 下一曲
  */
-- (void)playNext {
+- (void)playNextWithCurrentMusic:(HJMusicPlayModel *)currentMusic playMode:(HJMusicPlayAction)playAction {
+	if (self.musicList.count > 1) {
+		NSInteger currentIndex = [self.musicList indexOfObject:currentMusic];
+		NSInteger nextIndex = 0;
+		if (currentIndex + 1 < self.musicList.count) {
+			nextIndex = currentIndex + 1;
+		}
+		self.playModel = [self.musicList objectAtIndex:nextIndex];
+	}
+	[self startPlayWithModel:self.playModel];
 	
 }
 
@@ -150,9 +133,7 @@
             }
             case UIEventSubtypeRemoteControlNextTrack: {
                 HJLog(@"下一首");
-				NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-				self.playUrl = [dir stringByAppendingPathComponent:@"S.H.E - 美丽新世界.m4a"];
-				[self startPlayWithUrl:self.playUrl];
+				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionNext];
                 break;
             }
             case UIEventSubtypeRemoteControlPreviousTrack: {
@@ -204,6 +185,10 @@
 			case HJMusicPlayActionPause: {
 				[[HJMusicPlayer sharedInstance] pause];
 //				weakSelf.coverView.playing = NO;
+				break;
+			}
+			case HJMusicPlayActionNext: {
+				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionAllCycle];
 				break;
 			}
 				
