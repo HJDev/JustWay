@@ -25,6 +25,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    [super supportedInterfaceOrientations];
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 /*
 #pragma mark - Navigation
 
