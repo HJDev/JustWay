@@ -34,12 +34,16 @@
 /** 下一首按钮 */
 @property (nonatomic, weak) UIButton *nextButton;
 
+/** 是否在与滑竿交互 */
+@property (nonatomic, assign, getter=isSliderActive) BOOL sliderActive;
+
 @end
 
 @implementation HJMusicPlayControlView
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
+		self.sliderActive = NO;
 		[self setupViews];
 	}
 	return self;
@@ -58,6 +62,10 @@
 
 - (void)setCurrentTime:(NSInteger)currentTime {
 	_currentTime = currentTime;
+	
+	if (self.isSliderActive) {
+		return;
+	}
 	
 	NSInteger min = currentTime / 60;
 	NSInteger sec = currentTime % 60;
@@ -98,7 +106,12 @@
 	UISlider *slider = [UISlider new];
 	[slider setThumbImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_playbar_btn"]] forState:UIControlStateNormal];
 	[slider setMinimumTrackTintColor:HJBaseColor];
-	[slider setMaximumTrackTintColor:HJRGB(116, 151, 173)];
+	[slider setMaximumTrackTintColor:HJRGB(57, 105, 175)];
+	[slider addTarget:self action:@selector(handleStartSlider:) forControlEvents:UIControlEventTouchDown];
+	[slider addTarget:self action:@selector(handleSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+	[slider addTarget:self action:@selector(handleEndSlider:) forControlEvents:UIControlEventTouchUpInside];
+	// 监听progressSelider的点击手势
+	[slider addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSliderClick:)]];
 	[self addSubview:slider];
 	self.slider = slider;
 	
@@ -154,6 +167,43 @@
 }
 
 #pragma mark - user event
+/**
+ * 开始拖动滑竿
+ */
+- (void)handleStartSlider:(UISlider *)slider {
+	self.sliderActive = YES;
+}
+/**
+ * 正在拖动滑竿
+ */
+- (void)handleSliderValueChange:(UISlider *)slider {
+	NSInteger currentTime = slider.value;
+	NSInteger min = currentTime / 60;
+	NSInteger sec = currentTime % 60;
+	self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", min, sec];
+}
+/**
+ * 结束拖动滑竿
+ */
+- (void)handleEndSlider:(UISlider *)slider {
+	self.sliderActive = NO;
+	
+	if (self.sliderValueChangeBlock) {
+		self.sliderValueChangeBlock(slider.value);
+	}
+}
+/**
+ * 点击滑竿
+ */
+- (void)handleSliderClick:(UITapGestureRecognizer *)gest {
+	UISlider *slider = (UISlider *)gest.view;
+	
+	CGPoint point = [gest locationInView:slider];
+	CGFloat sliderValue = point.x / slider.frame.size.width;
+	if (self.sliderValueChangeBlock) {
+		self.sliderValueChangeBlock(sliderValue * slider.maximumValue);
+	}
+}
 /**
  * 点击播放模式按钮
  */

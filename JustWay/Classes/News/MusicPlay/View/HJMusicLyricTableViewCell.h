@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class HJMusicPlayLyricModel;
 
+#define MusicPlayLyricBackgroundColor [UIColor grayColor]
+
 @interface HJMusicLyricTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) HJMusicPlayLyricModel *model;

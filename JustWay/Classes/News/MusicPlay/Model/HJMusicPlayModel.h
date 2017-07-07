@@ -10,11 +10,15 @@
 
 @interface HJMusicPlayModel : NSObject
 
+/** 歌曲名称 */
+@property (nonatomic, copy) NSString *playName;
 /** 歌曲地址 */
-@property (nonatomic, strong) NSURL *playUrl;
+@property (nonatomic, strong) NSURL	 *playUrl;
 /** 歌词地址 */
-@property (nonatomic, strong) NSURL *lyricUrl;
+@property (nonatomic, strong) NSURL  *lyricUrl;
 /** 歌曲封面地址 */
-@property (nonatomic, strong) NSURL *coverUrl;
+@property (nonatomic, strong) NSURL  *coverUrl;
+/** 演唱者 */
+@property (nonatomic, copy) NSString *artist;
 
 @end

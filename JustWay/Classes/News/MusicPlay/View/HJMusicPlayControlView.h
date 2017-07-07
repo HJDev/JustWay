@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+/** 播放进度更新 */
+typedef void(^OnSliderValueChanged)(NSInteger currentTime);
 /**
  * 播放控制操作
  */
@@ -37,8 +39,10 @@ typedef void(^OnMusicPlayActionChange)(HJMusicPlayAction action);
 @property (nonatomic, assign) NSInteger currentTime;
 /** 总时长 */
 @property (nonatomic, assign) NSInteger duration;
-/** 播放器动作改版 */
+/** 播放器动作改变 */
 @property (nonatomic, copy)	OnMusicPlayActionChange actionChangeBlock;
+/** 播放进度更新 */
+@property (nonatomic, copy) OnSliderValueChanged sliderValueChangeBlock;
 /** 播放状态(YES : 正在播放 NO : 暂停) */
 @property (nonatomic, assign) BOOL playing;
 

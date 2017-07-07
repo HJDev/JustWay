@@ -25,6 +25,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
+		self.backgroundColor = MusicPlayLyricBackgroundColor;
+		_previousLrc = @"";
+		_nextLrc = @"";
+		_currentLrc = @"";
 		[self setupViews];
 	}
 	return self;
@@ -63,6 +67,7 @@
 			nextIndex = i + 1;
 		}
 		HJMusicPlayLyricModel *nextModel = [self.dataList objectAtIndex:nextIndex];
+		_nextLrc = nextModel.lyricStr;
 		if (model.time <= currentTime && nextModel.time > currentTime) {
 			if (i == self.currentLyricIndex) {
 				return;
@@ -70,8 +75,10 @@
 			NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:self.currentLyricIndex inSection:0];
 			HJMusicPlayLyricModel *lastModel = [self.dataList objectAtIndex:self.currentLyricIndex];
 			lastModel.current = NO;
+			_previousLrc = lastModel.lyricStr;
 			HJMusicPlayLyricModel *currentModel = [self.dataList objectAtIndex:i];
 			currentModel.current = YES;
+			_currentLrc = currentModel.lyricStr;
 			self.currentLyricIndex = i;
 			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
 			[self.tableView reloadRowsAtIndexPaths:@[lastIndexPath, indexPath] withRowAnimation:UITableViewRowAnimationNone];

@@ -24,10 +24,10 @@
 	NSMutableAttributedString *lyricAttr = [[NSMutableAttributedString alloc] initWithString:self.lyricStr];
 	if (current) {
 		[lyricAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:[lyricAttr.string rangeOfString:lyricAttr.string]];
-		[lyricAttr addAttribute:NSForegroundColorAttributeName value:HJBaseColor range:[lyricAttr.string rangeOfString:lyricAttr.string]];
+		[lyricAttr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:[lyricAttr.string rangeOfString:lyricAttr.string]];
 	} else {
 		[lyricAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:[lyricAttr.string rangeOfString:lyricAttr.string]];
-		[lyricAttr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:[lyricAttr.string rangeOfString:lyricAttr.string]];
+		[lyricAttr addAttribute:NSForegroundColorAttributeName value:HJRGB(179, 179, 179) range:[lyricAttr.string rangeOfString:lyricAttr.string]];
 	}
 	_lyricAttr = lyricAttr;
 }

@@ -13,6 +13,8 @@
 #import "HJMusicPlayer.h"
 #import "HJMusicPlayModel.h"
 #import <Masonry.h>
+#import <MediaPlayer/MPNowPlayingInfoCenter.h>
+#import <MediaPlayer/MPMediaItem.h>
 
 
 @interface HJMusicPlayViewController ()
@@ -41,6 +43,7 @@
     
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [[UIApplication sharedApplication] resignFirstResponder];
+	[UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -48,6 +51,7 @@
     
     [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
     [[UIApplication sharedApplication] becomeFirstResponder];
+	[UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,6 +81,8 @@
         [[HJMusicPlayer sharedInstance] setPlayProgressBlock:^(UInt64 currentTime) {
             [weakSelf.controlView setCurrentTime:currentTime];
 			weakSelf.lyricView.currentTime = currentTime;
+			//显示锁屏动态歌词
+			[weakSelf setupLockScreenInfoWithPreviousLrc:weakSelf.lyricView.previousLrc nextLrc:weakSelf.lyricView.nextLrc currentLrc:weakSelf.lyricView.currentLrc currentTime:currentTime];
         }];
 		//播放状态改变
 		[[HJMusicPlayer sharedInstance] setPlayStatusChangedBlock:^(BOOL playing) {
@@ -90,6 +96,7 @@
         [self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
 //		[[HJMusicPlayer sharedInstance] seek:200];
     }
+	[self setupLockScreenInfoWithPreviousLrc:self.lyricView.previousLrc nextLrc:self.lyricView.nextLrc currentLrc:self.lyricView.currentLrc currentTime:0];
 }
 
 /**
@@ -106,6 +113,64 @@
 	}
 	[self startPlayWithModel:self.playModel];
 	
+}
+
+/**
+ * 音乐锁屏信息展示
+ */
+- (void)setupLockScreenInfoWithPreviousLrc:(NSString *)previousLrc nextLrc:(NSString *)nextLrc currentLrc:(NSString *)currentLrc currentTime:(UInt64)currentTime {
+	// 1.获取锁屏中心
+	MPNowPlayingInfoCenter *playingInfoCenter = [MPNowPlayingInfoCenter defaultCenter];
+	//初始化一个存放音乐信息的字典
+	NSMutableDictionary *playingInfoDict = [NSMutableDictionary dictionary];
+	// 2、设置歌曲名
+	if (self.playModel.playName) {
+		[playingInfoDict setObject:self.playModel.playName forKey:MPMediaItemPropertyAlbumTitle];
+	}
+	// 设置歌手名
+	if (self.playModel.artist) {
+		[playingInfoDict setObject:self.playModel.artist forKey:MPMediaItemPropertyArtist];
+	}
+	// 3设置封面的图片
+	
+	UIImage *image = [self coverImage:[UIImage imageWithUnCachedName:@"image"] previousLrc:previousLrc nextLrc:nextLrc currentLrc:currentLrc];//[UIImage imageWithUnCachedName:@"image"];
+	if (image) {
+		MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+		[playingInfoDict setObject:artwork forKey:MPMediaItemPropertyArtwork];
+	}
+	// 4设置歌曲的总时长
+	[playingInfoDict setObject:@([HJMusicPlayer sharedInstance].duration) forKey:MPMediaItemPropertyPlaybackDuration];
+	[playingInfoDict setObject:@(currentTime) forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+	//音乐信息赋值给获取锁屏中心的nowPlayingInfo属性
+	playingInfoCenter.nowPlayingInfo = playingInfoDict;
+	
+	// 5.开启远程交互，只有开启这个才能进行远程操控
+	[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+}
+
+/**
+ * 获取锁屏图片+歌词
+ */
+- (UIImage *)coverImage:(UIImage *)coverImage previousLrc:(NSString *)previousLrc nextLrc:(NSString *)nextLrc currentLrc:(NSString *)currentLrc {
+	// 生成图片
+	UIGraphicsBeginImageContextWithOptions(coverImage.size, YES, 1.0);
+	[coverImage drawInRect:CGRectMake(0, 0, coverImage.size.width, coverImage.size.height)];
+	CGFloat textHeight = 18;
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.alignment = NSTextAlignmentCenter;
+	NSDictionary *previousAndNextLrcAttrDic = @{NSFontAttributeName : [UIFont systemFontOfSize:14],
+												NSForegroundColorAttributeName : [UIColor whiteColor],
+												NSParagraphStyleAttributeName : style};
+	NSDictionary *currentLrcAttrDic = @{NSFontAttributeName : [UIFont systemFontOfSize:18],
+										NSForegroundColorAttributeName : HJBaseColor,
+										NSParagraphStyleAttributeName : style};
+	[previousLrc drawInRect:CGRectMake(0, coverImage.size.height - 3 * textHeight, coverImage.size.width, coverImage.size.height) withAttributes:previousAndNextLrcAttrDic];
+	[nextLrc drawInRect:CGRectMake(0, coverImage.size.height - textHeight, coverImage.size.width, coverImage.size.height) withAttributes:previousAndNextLrcAttrDic];
+	[currentLrc drawInRect:CGRectMake(0, coverImage.size.height - 2 * textHeight, coverImage.size.width, coverImage.size.height) withAttributes:currentLrcAttrDic];
+	
+	UIImage *lockImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return lockImage;
 }
 
 #pragma mark - 接受远程控制事件
@@ -195,6 +260,9 @@
 			default:
 				break;
 		}
+	}];
+	[controlView setSliderValueChangeBlock:^(NSInteger currentTime) {
+		[[HJMusicPlayer sharedInstance] seek:currentTime];
 	}];
 	[self.view addSubview:controlView];
 	self.controlView = controlView;

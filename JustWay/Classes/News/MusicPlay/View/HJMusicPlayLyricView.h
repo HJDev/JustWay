@@ -17,4 +17,8 @@
 /** 歌词文件 */
 @property (nonatomic, strong) NSURL *lyricUrl;
 
+@property (nonatomic, copy, readonly) NSString *previousLrc;
+@property (nonatomic, copy, readonly) NSString *nextLrc;
+@property (nonatomic, copy, readonly) NSString *currentLrc;
+
 @end

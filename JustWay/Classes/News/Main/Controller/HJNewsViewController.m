@@ -112,10 +112,12 @@
 				HJLog(@"启动失败");
 			}
 		}];
+		[UIApplication sharedApplication].idleTimerDisabled = YES;
 	} else {
 		//暂停
 		[[HJUploaderServer sharedInstance] stop];
 		self.title = @"动态";
+		[UIApplication sharedApplication].idleTimerDisabled = NO;
 	}
 	button.selected = !button.isSelected;
 }
