@@ -25,7 +25,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
-		self.backgroundColor = MusicPlayLyricBackgroundColor;
 		_previousLrc = @"";
 		_nextLrc = @"";
 		_currentLrc = @"";
@@ -40,6 +39,7 @@
 	tableView.delegate = self;
 	tableView.dataSource = self;
 	tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	tableView.backgroundColor = MusicPlayLyricBackgroundColor;
 	[self addSubview:tableView];
 	self.tableView = tableView;
 	

@@ -7,6 +7,7 @@
 //
 
 #import "HJMusicPlayControlView.h"
+#import "HJSlider.h"
 #import <Masonry.h>
 
 /** 播放器资源包 */
@@ -19,7 +20,7 @@
 /** 总共音乐时间长 */
 @property (nonatomic, weak) UILabel  *totalTimeLabel;
 /** 播放进度滑竿 */
-@property (nonatomic, weak) UISlider *slider;
+@property (nonatomic, weak) HJSlider *slider;
 
 /** 播放控制底部View */
 @property (nonatomic, weak) UIView	 *playBottomView;
@@ -103,15 +104,19 @@
 	self.totalTimeLabel = totalTimeLabel;
 	
 	//播放进度滑竿
-	UISlider *slider = [UISlider new];
+	HJSlider *slider = [HJSlider new];
 	[slider setThumbImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_fm_playbar_btn"]] forState:UIControlStateNormal];
 	[slider setMinimumTrackTintColor:HJBaseColor];
 	[slider setMaximumTrackTintColor:HJRGB(57, 105, 175)];
 	[slider addTarget:self action:@selector(handleStartSlider:) forControlEvents:UIControlEventTouchDown];
 	[slider addTarget:self action:@selector(handleSliderValueChange:) forControlEvents:UIControlEventValueChanged];
-	[slider addTarget:self action:@selector(handleEndSlider:) forControlEvents:UIControlEventTouchUpInside];
+//	[slider addTarget:self action:@selector(handleSliderClick:) forControlEvents:UIControlEventTouchUpInside];
+	HJWeakSelf;
+	[slider setTouchBlock:^(UITouchPhase touchType, CGPoint touchPoint) {
+		[weakSelf handleEndSlider:weakSelf.slider touchPoint:touchPoint];
+	}];
 	// 监听progressSelider的点击手势
-	[slider addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSliderClick:)]];
+//	[slider addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSliderClick:)]];
 	[self addSubview:slider];
 	self.slider = slider;
 	
@@ -167,6 +172,11 @@
 }
 
 #pragma mark - user event
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	[super touchesEnded:touches withEvent:event];
+	
+	HJLog(@"%@   ++++   %@", touches, event);
+}
 /**
  * 开始拖动滑竿
  */
@@ -185,25 +195,21 @@
 /**
  * 结束拖动滑竿
  */
-- (void)handleEndSlider:(UISlider *)slider {
-	self.sliderActive = NO;
+- (void)handleEndSlider:(UISlider *)slider touchPoint:(CGPoint)touchPoint {
 	
-	if (self.sliderValueChangeBlock) {
-		self.sliderValueChangeBlock(slider.value);
+	if (self.sliderActive) {
+		if (self.sliderValueChangeBlock) {
+			self.sliderValueChangeBlock(slider.value);
+		}
+		self.sliderActive = NO;
+	} else {
+		CGFloat sliderValue = touchPoint.x / slider.frame.size.width;
+		if (self.sliderValueChangeBlock) {
+			self.sliderValueChangeBlock(sliderValue * slider.maximumValue);
+		}
 	}
 }
-/**
- * 点击滑竿
- */
-- (void)handleSliderClick:(UITapGestureRecognizer *)gest {
-	UISlider *slider = (UISlider *)gest.view;
-	
-	CGPoint point = [gest locationInView:slider];
-	CGFloat sliderValue = point.x / slider.frame.size.width;
-	if (self.sliderValueChangeBlock) {
-		self.sliderValueChangeBlock(sliderValue * slider.maximumValue);
-	}
-}
+
 /**
  * 点击播放模式按钮
  */

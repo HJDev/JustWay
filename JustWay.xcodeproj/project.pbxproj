@@ -55,6 +55,7 @@
 		79BC85721F0DD6A50050F353 /* HJMusicPlayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85711F0DD6A50050F353 /* HJMusicPlayModel.m */; };
 		79BC85751F0DF6D00050F353 /* NSString+HJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85741F0DF6D00050F353 /* NSString+HJ.m */; };
 		79BC85781F0E02F00050F353 /* HJCommonBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC85771F0E02F00050F353 /* HJCommonBaseViewController.m */; };
+		79BC857C1F0F95090050F353 /* HJSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC857B1F0F95090050F353 /* HJSlider.m */; };
 		B566C31F4241B0AD7CDD907D /* libPods-JustWayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C0C7EBB2C17F7F30782183 /* libPods-JustWayTests.a */; };
 		D9B7170B3AE375552987F35A /* libPods-JustWayUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */; };
 /* End PBXBuildFile section */
@@ -161,6 +162,8 @@
 		79BC85741F0DF6D00050F353 /* NSString+HJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HJ.m"; sourceTree = "<group>"; };
 		79BC85761F0E02F00050F353 /* HJCommonBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCommonBaseViewController.h; sourceTree = "<group>"; };
 		79BC85771F0E02F00050F353 /* HJCommonBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCommonBaseViewController.m; sourceTree = "<group>"; };
+		79BC857A1F0F95090050F353 /* HJSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJSlider.h; sourceTree = "<group>"; };
+		79BC857B1F0F95090050F353 /* HJSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJSlider.m; sourceTree = "<group>"; };
 		79DB9D0F2F47E828322B8B57 /* Pods-JustWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustWay/Pods-JustWay.release.xcconfig"; sourceTree = "<group>"; };
 		97EAF55DB5741F2E219C9E45 /* libPods-JustWayUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustWayUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B486C229E8BF6F76F5885B55 /* Pods-JustWayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustWayUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustWayUITests/Pods-JustWayUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -420,6 +423,7 @@
 		795A0DF11F0352D600F02FB4 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				79BC85791F0F94E40050F353 /* Extension */,
 				795A0E061F037F3B00F02FB4 /* Tools */,
 				795A0DFC1F035A7C00F02FB4 /* Common */,
 				795A0DF21F0352E800F02FB4 /* Category */,
@@ -560,6 +564,15 @@
 				79BC856B1F0C9B490050F353 /* HJMusicLyricTool.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		79BC85791F0F94E40050F353 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				79BC857A1F0F95090050F353 /* HJSlider.h */,
+				79BC857B1F0F95090050F353 /* HJSlider.m */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		DAE8F1F147C12E71EB53D7DE /* Frameworks */ = {
@@ -894,6 +907,7 @@
 				795A0DF51F03532400F02FB4 /* UIImage+HJ.m in Sources */,
 				790D33131F06440200491A7B /* HJMusicPlayControlView.m in Sources */,
 				79BC856C1F0C9B490050F353 /* HJMusicLyricTool.m in Sources */,
+				79BC857C1F0F95090050F353 /* HJSlider.m in Sources */,
 				79BC856F1F0CB2B70050F353 /* HJMusicLyricTableViewCell.m in Sources */,
 				795A0DCD1F03428400F02FB4 /* HJFilesViewController.m in Sources */,
 				795A0DD01F03428E00F02FB4 /* HJMeViewController.m in Sources */,

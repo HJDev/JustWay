@@ -52,7 +52,7 @@
 			}
 			NSInteger time = [self lyricTime:tStr offset:offset];
 			HJMusicPlayLyricModel *model = [HJMusicPlayLyricModel new];
-			model.lyricStr = lrcStr;
+			model.lyricStr = [lrcStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 			model.time = time;
 			model.current = NO;
 			[lyricList addObject:model];
