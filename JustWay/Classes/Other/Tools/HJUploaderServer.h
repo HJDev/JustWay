@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class HJNewsModel;
 
 @interface HJUploaderServer : NSObject
 
@@ -22,7 +23,7 @@
  */
 - (void)getFileLists;
 
-@property (nonatomic, strong) NSMutableArray *fileList;
+@property (nonatomic, strong) NSMutableArray<HJNewsModel *> *fileList;
 @property (nonatomic, copy)   NSString		 *fileDir;
 
 @end

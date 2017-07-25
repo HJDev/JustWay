@@ -31,6 +31,22 @@ typedef NS_ENUM(NSUInteger, HJMusicPlayAction) {
 	/** 播放列表 */
 	HJMusicPlayActionPlayList,
 };
+/**
+ * 播放模式
+ */
+typedef NS_ENUM(NSUInteger, HJMusicPlayMode) {
+	/** 全部循环 */
+	HJMusicPlayModeAllCycle,
+	/** 单曲循环 */
+	HJMusicPlayModeSingleCycle,
+	/** 随机播放 */
+	HJMusicPlayModeRandom,
+};
+/**
+ * 播放操作改变
+ *
+ * @param action 播放动作
+ */
 typedef void(^OnMusicPlayActionChange)(HJMusicPlayAction action);
 
 @interface HJMusicPlayControlView : UIView
@@ -45,5 +61,7 @@ typedef void(^OnMusicPlayActionChange)(HJMusicPlayAction action);
 @property (nonatomic, copy) OnSliderValueChanged sliderValueChangeBlock;
 /** 播放状态(YES : 正在播放 NO : 暂停) */
 @property (nonatomic, assign) BOOL playing;
+/** 播放模式 */
+@property (nonatomic, assign) HJMusicPlayMode playMode;
 
 @end

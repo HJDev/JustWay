@@ -58,7 +58,7 @@
 	self.observerCount++;
 	
 	HJWeakSelf;
-	[self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+	[self.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(0.5, NSEC_PER_SEC) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
 		//在这里将监听到的播放进度代理出去，对进度条进行设置
 		UInt64 currentTime = weakSelf.player.currentTime.value / weakSelf.player.currentTime.timescale;
 		if (weakSelf.playProgressBlock) {

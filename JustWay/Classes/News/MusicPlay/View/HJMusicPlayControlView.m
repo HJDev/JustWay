@@ -81,6 +81,12 @@
 	self.playButton.selected = !playing;
 }
 
+- (void)setPlayMode:(HJMusicPlayMode)playMode {
+	_playMode = playMode;
+	
+	[self setPlayMode:playMode playModelButton:self.playModeButton];
+}
+
 /**
  * 初始化控件
  */
@@ -110,13 +116,10 @@
 	[slider setMaximumTrackTintColor:HJRGB(57, 105, 175)];
 	[slider addTarget:self action:@selector(handleStartSlider:) forControlEvents:UIControlEventTouchDown];
 	[slider addTarget:self action:@selector(handleSliderValueChange:) forControlEvents:UIControlEventValueChanged];
-//	[slider addTarget:self action:@selector(handleSliderClick:) forControlEvents:UIControlEventTouchUpInside];
 	HJWeakSelf;
 	[slider setTouchBlock:^(UITouchPhase touchType, CGPoint touchPoint) {
 		[weakSelf handleEndSlider:weakSelf.slider touchPoint:touchPoint];
 	}];
-	// 监听progressSelider的点击手势
-//	[slider addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSliderClick:)]];
 	[self addSubview:slider];
 	self.slider = slider;
 	
@@ -217,8 +220,7 @@
 	if (button.tag == HJMusicPlayActionAllCycle) {
 		button.tag = HJMusicPlayActionSingleCycle;
 		
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_one"]] forState:UIControlStateNormal];
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_one_prs"]] forState:UIControlStateHighlighted];
+		[self setPlayMode:HJMusicPlayModeSingleCycle playModelButton:button];
 		
 		if (self.actionChangeBlock) {
 			self.actionChangeBlock(HJMusicPlayActionSingleCycle);
@@ -226,8 +228,7 @@
 	} else if (button.tag == HJMusicPlayActionSingleCycle) {
 		button.tag = HJMusicPlayActionRandom;
 		
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_order"]] forState:UIControlStateNormal];
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_order_prs"]] forState:UIControlStateHighlighted];
+		[self setPlayMode:HJMusicPlayModeRandom playModelButton:button];
 		
 		if (self.actionChangeBlock) {
 			self.actionChangeBlock(HJMusicPlayActionRandom);
@@ -235,14 +236,38 @@
 	} else if (button.tag == HJMusicPlayActionRandom) {
 		button.tag = HJMusicPlayActionAllCycle;
 		
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop"]] forState:UIControlStateNormal];
-		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop_prs"]] forState:UIControlStateHighlighted];
+		[self setPlayMode:HJMusicPlayModeAllCycle playModelButton:button];
 		
 		if (self.actionChangeBlock) {
 			self.actionChangeBlock(HJMusicPlayActionAllCycle);
 		}
 	}
 	
+}
+
+/**
+ * 设置播放模式button 状态
+ */
+- (void)setPlayMode:(HJMusicPlayMode)playMode playModelButton:(UIButton *)button {
+	
+	_playMode = playMode;
+	
+	if (playMode == HJMusicPlayModeSingleCycle) {
+		
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_one"]] forState:UIControlStateNormal];
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_one_prs"]] forState:UIControlStateHighlighted];
+		
+	} else if (playMode == HJMusicPlayModeRandom) {
+		
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_order"]] forState:UIControlStateNormal];
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_order_prs"]] forState:UIControlStateHighlighted];
+		
+	} else if (playMode == HJMusicPlayModeAllCycle) {
+		
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop"]] forState:UIControlStateNormal];
+		[button setImage:[UIImage imageWithUnCachedName:[HJMusicPlayBundle stringByAppendingPathComponent:@"cm2_play_btn_loop_prs"]] forState:UIControlStateHighlighted];
+		
+	}
 }
 /**
  * 点击播放列表按钮

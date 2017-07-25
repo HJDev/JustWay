@@ -18,7 +18,7 @@
 
 @property (nonatomic, weak)	  UITableView	 *tableView;
 
-@property (nonatomic, strong) NSMutableArray *dataList;
+@property (nonatomic, strong) NSMutableArray<HJNewsModel *> *dataList;
 /** 文件存储目录 */
 @property (nonatomic, copy)	  NSString		 *fileDir;
 /** 服务器监听端口 */
@@ -149,11 +149,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	HJNewsModel *model = self.dataList[indexPath.row];
+	HJNewsModel *rowModel = self.dataList[indexPath.row];
 	
-	if ([model.fileName hasSuffix:@".mp3"] || [model.fileName hasSuffix:@".m4a"]) {
+	if ([rowModel.fileName hasSuffix:@".mp3"] || [rowModel.fileName hasSuffix:@".m4a"]) {
 		//获取所有音乐文件
 		NSMutableArray *musicList = [NSMutableArray array];
+		HJMusicPlayModel *selectPlayModel;
 		for (HJNewsModel *model in self.dataList) {
 			if ([model.fileName hasSuffix:@".mp3"] || [model.fileName hasSuffix:@".m4a"]) {
 				NSString *musicPath = [self.fileDir stringByAppendingPathComponent:model.fileName];
@@ -165,24 +166,40 @@
 				playModel.playUrl = [NSURL fileURLWithPath:musicPath];
 				playModel.lyricUrl = [fm fileExistsAtPath:lyricPath] ? [NSURL fileURLWithPath:lyricPath] : nil;
 				[musicList addObject:playModel];
+				
+				if (model == rowModel) {
+					selectPlayModel = playModel;
+				}
 			}
 		}
 		
-		NSString *musicPath = [self.fileDir stringByAppendingPathComponent:model.fileName];
-		NSArray *suffix = [musicPath componentsSeparatedByString:@"."];
-		NSString *lyricPath = [musicPath stringByReplacingOccurrencesOfString:suffix.lastObject withString:@"lrc"];
-		NSFileManager *fm = [NSFileManager defaultManager];
-		
-		HJMusicPlayModel *playModel = [HJMusicPlayModel new];
-		playModel.playUrl = [NSURL fileURLWithPath:musicPath];
-		playModel.lyricUrl = [fm fileExistsAtPath:lyricPath] ? [NSURL fileURLWithPath:lyricPath] : nil;
-		
 		HJMusicPlayViewController *mpVc = [HJMusicPlayViewController new];
-		mpVc.playModel = playModel;
-		mpVc.musicList = [musicList mutableCopy];
-		mpVc.title = model.fileName;
+		mpVc.playModel = selectPlayModel;
+		mpVc.musicList = musicList;
+		mpVc.title = rowModel.fileName;
 		[self.navigationController pushViewController:mpVc animated:YES];
 	}
+}
+
+#pragma mark - delete action
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	HJNewsModel *model = [self.dataList objectAtIndex:indexPath.row];
+	
+	[[NSFileManager defaultManager] removeItemAtPath:model.filePath error:nil];
+	[self.dataList removeObject:model];
+	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return UITableViewCellEditingStyleDelete;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return @"删除";
 }
 
 #pragma mark - lazyload

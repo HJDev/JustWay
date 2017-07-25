@@ -16,6 +16,8 @@
 #import <MediaPlayer/MPNowPlayingInfoCenter.h>
 #import <MediaPlayer/MPMediaItem.h>
 
+/** 播放模式 */
+#define kHJMusicPlayMode @"HJMusicPlayMode"
 
 @interface HJMusicPlayViewController ()
 
@@ -91,7 +93,7 @@
 		}];
         //播放完成
         [[HJMusicPlayer sharedInstance] setPlayEndBlock:^(NSURL *playUrl) {
-			[weakSelf playNextWithCurrentMusic:weakSelf.playModel playMode:HJMusicPlayActionAllCycle];
+			[weakSelf playNextWithCurrentMusic:weakSelf.playModel playMode:HJMusicPlayActionNext userAction:NO];
         }];
         [self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
 //		[[HJMusicPlayer sharedInstance] seek:200];
@@ -101,14 +103,45 @@
 
 /**
  * 下一曲
+ *
+ * @param currentMusic 当前播放歌曲
+ * @param playAction   播放动作
+ * @param userAction   是否为用户操作 (YES : 用户操作 NO : 自动续播)
  */
-- (void)playNextWithCurrentMusic:(HJMusicPlayModel *)currentMusic playMode:(HJMusicPlayAction)playAction {
+- (void)playNextWithCurrentMusic:(HJMusicPlayModel *)currentMusic
+						playMode:(HJMusicPlayAction)playAction
+					  userAction:(BOOL)userAction {
 	if (self.musicList.count > 1) {
-		NSInteger currentIndex = [self.musicList indexOfObject:currentMusic];
-		NSInteger nextIndex = 0;
-		if (currentIndex + 1 < self.musicList.count) {
-			nextIndex = currentIndex + 1;
+		NSInteger nextPlayIndex = [self.musicList indexOfObject:self.playModel];
+		HJMusicPlayMode playMode = [self getPlayMode];
+		switch (playMode) {
+			case HJMusicPlayModeSingleCycle: {
+				if (userAction) {
+					if (playAction == HJMusicPlayActionNext) {
+						nextPlayIndex++;
+					} else {
+						nextPlayIndex--;
+					}
+				}
+				break;
+			}
+			case HJMusicPlayModeRandom: {
+				nextPlayIndex = arc4random() % self.musicList.count;
+				break;
+			}
+			case HJMusicPlayModeAllCycle: {
+				if (playAction == HJMusicPlayActionNext) {
+					nextPlayIndex++;
+				} else {
+					nextPlayIndex--;
+				}
+				break;
+			}
+				
+			default:
+				break;
 		}
+		NSInteger nextIndex = (nextPlayIndex + self.musicList.count) % self.musicList.count;
 		self.playModel = [self.musicList objectAtIndex:nextIndex];
 	}
 	[self startPlayWithModel:self.playModel];
@@ -198,11 +231,12 @@
             }
             case UIEventSubtypeRemoteControlNextTrack: {
                 HJLog(@"下一首");
-				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionNext];
+				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionNext userAction:YES];
                 break;
             }
             case UIEventSubtypeRemoteControlPreviousTrack: {
                 HJLog(@"上一首");
+				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionPreview userAction:YES];
                 break;
             }
             case UIEventSubtypeRemoteControlTogglePlayPause: {
@@ -240,20 +274,43 @@
 	//播放器控制View
 	HJMusicPlayControlView *controlView = [HJMusicPlayControlView new];
 	controlView.backgroundColor = [UIColor lightGrayColor];
+	controlView.playing = [HJMusicPlayer sharedInstance].playing;
+	controlView.playMode = [self getPlayMode];
 	[controlView setActionChangeBlock:^(HJMusicPlayAction playAction) {
 		switch (playAction) {
 			case HJMusicPlayActionPlay: {
+				//播放
 				[[HJMusicPlayer sharedInstance] resume];
-//				weakSelf.coverView.playing = YES;
 				break;
 			}
 			case HJMusicPlayActionPause: {
+				//暂停
 				[[HJMusicPlayer sharedInstance] pause];
-//				weakSelf.coverView.playing = NO;
+				break;
+			}
+			case HJMusicPlayActionPreview: {
+				//上一首
+				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionPreview userAction:YES];
 				break;
 			}
 			case HJMusicPlayActionNext: {
-				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionAllCycle];
+				//下一首
+				[self playNextWithCurrentMusic:self.playModel playMode:HJMusicPlayActionNext userAction:YES];
+				break;
+			}
+			case HJMusicPlayActionRandom: {
+				//随机播放
+				[self savePlayMode:HJMusicPlayModeRandom];
+				break;
+			}
+			case HJMusicPlayActionAllCycle: {
+				//全部循环
+				[self savePlayMode:HJMusicPlayModeAllCycle];
+				break;
+			}
+			case HJMusicPlayActionSingleCycle: {
+				//单曲循环
+				[self savePlayMode:HJMusicPlayModeSingleCycle];
 				break;
 			}
 				
@@ -268,6 +325,24 @@
 	self.controlView = controlView;
 	
 	[self setupConstraints];
+}
+
+/**
+ * 保存播放模式
+ */
+- (void)savePlayMode:(HJMusicPlayMode)playMode {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:@(playMode) forKey:kHJMusicPlayMode];
+	[defaults synchronize];
+}
+
+/**
+ * 获取播放模式
+ */
+- (HJMusicPlayMode)getPlayMode {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	HJMusicPlayMode playMode = [defaults integerForKey:kHJMusicPlayMode];
+	return playMode;
 }
 
 /**
