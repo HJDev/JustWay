@@ -35,6 +35,9 @@
 #import "UIImage+HJ.h"
 #import "NSString+HJ.h"
 
+/** 公共字符串定义 */
+#import "GloabalDefinition.h"
+
 /** 手机类型 */
 //是否是iPhone5
 #define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)

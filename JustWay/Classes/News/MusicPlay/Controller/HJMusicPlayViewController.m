@@ -38,6 +38,10 @@
 	
 	[self setupViews];
     [self startPlayWithModel:self.playModel];
+	
+	//注册通知
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterBackground:) name:kAPP_ENTER_BACKGROUND object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEnterForeground:) name:kAPP_ENTER_FORGROUND object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,6 +67,20 @@
 
 - (void)dealloc {
 	HJLog(@"%s", __func__);
+}
+
+/**
+ * 进入后台
+ */
+- (void)handleEnterBackground:(NSNotification *)noti {
+	[UIApplication sharedApplication].idleTimerDisabled = NO;
+}
+
+/**
+ * 进入前台
+ */
+- (void)handleEnterForeground:(NSNotification *)noti {
+	[UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
 /**
@@ -96,7 +114,6 @@
 			[weakSelf playNextWithCurrentMusic:weakSelf.playModel playMode:HJMusicPlayActionNext userAction:NO];
         }];
         [self.controlView setDuration:[HJMusicPlayer sharedInstance].duration];
-//		[[HJMusicPlayer sharedInstance] seek:200];
     }
 	[self setupLockScreenInfoWithPreviousLrc:self.lyricView.previousLrc nextLrc:self.lyricView.nextLrc currentLrc:self.lyricView.currentLrc currentTime:0];
 }

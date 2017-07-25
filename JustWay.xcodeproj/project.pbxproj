@@ -149,6 +149,7 @@
 		795A0E4B1F04E7B800F02FB4 /* HJNewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJNewsModel.h; sourceTree = "<group>"; };
 		795A0E4C1F04E7B800F02FB4 /* HJNewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJNewsModel.m; sourceTree = "<group>"; };
 		795DB7B01F068D9C00172BD4 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		796AA1E91F27528600AE3DF1 /* GloabalDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GloabalDefinition.h; sourceTree = "<group>"; };
 		79BC85631F0B342A0050F353 /* NewsListIcons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NewsListIcons.bundle; sourceTree = "<group>"; };
 		79BC85661F0C83DB0050F353 /* HJMusicPlayLyricModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJMusicPlayLyricModel.h; sourceTree = "<group>"; };
 		79BC85671F0C83DB0050F353 /* HJMusicPlayLyricModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJMusicPlayLyricModel.m; sourceTree = "<group>"; };
@@ -450,6 +451,7 @@
 				795A0E291F038BF200F02FB4 /* HJConfig.h */,
 				795A0E2A1F038BF200F02FB4 /* HJConfig.m */,
 				795A0DFD1F035B2B00F02FB4 /* PrefixHeader.pch */,
+				796AA1E91F27528600AE3DF1 /* GloabalDefinition.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
